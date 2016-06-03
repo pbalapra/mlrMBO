@@ -16,5 +16,5 @@ pages:
     - 'In Depth Introduction': 'in_depth_introduction.md'
 - Advanced:
     - 'Parallelization': 'parallelization.md'
-    - 'Multi point proposal': 'multipoint.md'
-    - 'Multi-criteria optimization': 'multicrit.md'
+    - 'Multi point proposal': 'multi_point_proposal.md'
+    - 'Multi-criteria optimization': 'multi_criteria_optimization.md'
