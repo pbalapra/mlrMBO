@@ -92,6 +92,18 @@
 </li>
 
                         
+                            
+<li >
+    <a href="../multi_point_proposal/index.html">Multi point proposal</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../multi_criteria_optimization/index.html">Multi-criteria optimization</a>
+</li>
+
+                        
                         </ul>
                     </li>
                 
@@ -137,7 +149,10 @@
                 <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
     
-        <li class="main active"><a href="#objective-function">Objective Function</a></li>
+        <li class="main active"><a href="#introduction">Introduction</a></li>
+        
+    
+        <li class="main "><a href="#objective-function">Objective Function</a></li>
         
     
         <li class="main "><a href="#initial-design">Initial Design</a></li>
@@ -148,15 +163,15 @@
     
         <li class="main "><a href="#mbocontrol">MBOControl</a></li>
         
-    
-        <li class="main "><a href="#setmbocontrolinfill">setMBOControlInfill</a></li>
+            <li><a href="#mbocontrolinfill">MBOControlInfill</a></li>
         
-            <li><a href="#attribute-crit">Attribute crit</a></li>
+            <li><a href="#setmbocontroltermination">setMBOControlTermination</a></li>
         
-            <li><a href="#attribute-opt">Attribute opt</a></li>
+            <li><a href="#setmbocontrolmultipoint">setMBOControlMultiPoint</a></li>
         
-    
-        <li class="main "><a href="#further-functions">Further functions</a></li>
+            <li><a href="#setmbocontrolmultifid">setMBOControlMultiFid</a></li>
+        
+            <li><a href="#setmbocontrolmulticrit">setMBOControlMultiCrit</a></li>
         
     
         <li class="main "><a href="#experiments-and-output">Experiments and Output</a></li>
@@ -170,11 +185,15 @@
 </div></div>
                 <div class="col-md-9" role="main">
 
-<p>The first step of MBO requires an initial set of evaluation points which is then evaluated by the black box function.
-The basic procedure of MBO is an iterating loop of the following steps:
-Firstly, a user defined surrogate model is fitted on the evaluated points, secondly, a new evaluation point is proposed by an infill criterion and lastly, its performance is evaluated.
-The result of this sequential procedure is the optimization path containing the best parameter setting and the fitted surrogate model.</p>
-<p>Once again, take a look at the already introduced basic example of the optimization of the one dimensional Rastrigin function.</p>
+<h1 id="introduction">Introduction</h1>
+<p>The first step of MBO requires an initial set of points which are then evaluated by the black box function.</p>
+<p>The procedure of MBO is a loop of the following steps:</p>
+<ol>
+<li>A user defined surrogate model is fitted on the evaluated points</li>
+<li>A new evaluation point is proposed by an infill criterion </li>
+<li>Its performance is evaluated</li>
+</ol>
+<p>We take a look at the already <a href="../quickstart/index.html">quickstart</a> example of optimizing the one dimensional Rastrigin function.</p>
 <pre><code class="r">library(mlrMBO)
 #&gt; Loading required package: lhs
 #&gt; Loading required package: smoof
@@ -196,7 +215,7 @@ obj.fun = makeRastriginFunction(1)
 learner = makeLearner(&quot;regr.km&quot;, predict.type = &quot;se&quot;, covtype = &quot;matern3_2&quot;)
 control = makeMBOControl()
 control = setMBOControlTermination(control, iters = 5)
-control = setMBOControlInfill(control, crit = &quot;ei&quot;)
+control = setMBOControlInfill(control, crit = &quot;ei&quot;, opt = &quot;ea&quot;)
 
 result = mbo(obj.fun, learner = learner, control = control, show.info = TRUE)
 #&gt; Computing y column(s) for design. Not provided.
@@ -234,7 +253,13 @@ result = mbo(obj.fun, learner = learner, control = control, show.info = TRUE)
 #&gt; F = 13.7295
 #&gt; final  value 13.729484 
 #&gt; converged
-#&gt; [mbo] 1: x=-4.72 : y = 33.9 : 0.0 secs : infill_ei
+#&gt; Loading required package: emoa
+#&gt; 
+#&gt; Attaching package: 'emoa'
+#&gt; The following object is masked from 'package:BBmisc':
+#&gt; 
+#&gt;     coalesce
+#&gt; [mbo] 1: x=3.5 : y = 32.2 : 0.0 secs : infill_ei
 #&gt; 
 #&gt; optimisation start
 #&gt; ------------------
@@ -246,37 +271,28 @@ result = mbo(obj.fun, learner = learner, control = control, show.info = TRUE)
 #&gt;   - type :  matern3_2 
 #&gt;   - nugget : NO
 #&gt;   - parameters lower bounds :  1e-10 
-#&gt;   - parameters upper bounds :  16.03308 
-#&gt;   - best initial criterion value(s) :  -18.8355 
+#&gt;   - parameters upper bounds :  13.4358 
+#&gt;   - best initial criterion value(s) :  -18.15923 
 #&gt; 
 #&gt; N = 1, M = 5 machine precision = 2.22045e-16
 #&gt; At X0, 0 variables are exactly at the bounds
-#&gt; At iterate     0  f=       18.835  |proj g|=     0.075704
-#&gt; At iterate     1  f =       18.832  |proj g|=      0.019382
-#&gt; At iterate     2  f =       18.832  |proj g|=     0.0091959
-#&gt; At iterate     3  f =       18.832  |proj g|=     0.0038259
-#&gt; At iterate     4  f =       18.832  |proj g|=     0.0017401
-#&gt; At iterate     5  f =       18.832  |proj g|=    0.00078512
-#&gt; At iterate     6  f =       18.832  |proj g|=    0.00036173
-#&gt; At iterate     7  f =       18.832  |proj g|=    0.00016757
-#&gt; At iterate     8  f =       18.832  |proj g|=    7.8277e-05
-#&gt; At iterate     9  f =       18.832  |proj g|=    3.6757e-05
-#&gt; At iterate    10  f =       18.832  |proj g|=    1.7346e-05
-#&gt; At iterate    11  f =       18.832  |proj g|=    8.2183e-06
-#&gt; At iterate    12  f =       18.832  |proj g|=    3.9073e-06
+#&gt; At iterate     0  f=       18.159  |proj g|=      0.24804
+#&gt; At iterate     1  f =       18.157  |proj g|=      0.019406
+#&gt; At iterate     2  f =       18.157  |proj g|=     0.0010016
+#&gt; At iterate     3  f =       18.157  |proj g|=    4.3897e-06
 #&gt; 
-#&gt; iterations 12
-#&gt; function evaluations 13
-#&gt; segments explored during Cauchy searches 12
+#&gt; iterations 3
+#&gt; function evaluations 5
+#&gt; segments explored during Cauchy searches 3
 #&gt; BFGS updates skipped 0
 #&gt; active bounds at final generalized Cauchy point 0
-#&gt; norm of the final projected gradient 3.90729e-06
-#&gt; final function value 18.8316
+#&gt; norm of the final projected gradient 4.3897e-06
+#&gt; final function value 18.157
 #&gt; 
-#&gt; F = 18.8316
-#&gt; final  value 18.831551 
+#&gt; F = 18.157
+#&gt; final  value 18.156974 
 #&gt; converged
-#&gt; [mbo] 2: x=1.87 : y = 6.7 : 0.0 secs : infill_ei
+#&gt; [mbo] 2: x=1.76 : y = 12.7 : 0.0 secs : infill_ei
 #&gt; 
 #&gt; optimisation start
 #&gt; ------------------
@@ -288,31 +304,31 @@ result = mbo(obj.fun, learner = learner, control = control, show.info = TRUE)
 #&gt;   - type :  matern3_2 
 #&gt;   - nugget : NO
 #&gt;   - parameters lower bounds :  1e-10 
-#&gt;   - parameters upper bounds :  16.03308 
-#&gt;   - best initial criterion value(s) :  -21.02962 
+#&gt;   - parameters upper bounds :  13.4358 
+#&gt;   - best initial criterion value(s) :  -21.29922 
 #&gt; 
 #&gt; N = 1, M = 5 machine precision = 2.22045e-16
 #&gt; At X0, 0 variables are exactly at the bounds
-#&gt; At iterate     0  f=        21.03  |proj g|=      0.61913
-#&gt; At iterate     1  f =       20.983  |proj g|=       0.57786
-#&gt; At iterate     2  f =       20.921  |proj g|=       0.27495
-#&gt; At iterate     3  f =       20.917  |proj g|=       0.04167
-#&gt; At iterate     4  f =       20.917  |proj g|=     0.0014829
-#&gt; At iterate     5  f =       20.917  |proj g|=    8.3302e-06
-#&gt; At iterate     6  f =       20.917  |proj g|=    1.6546e-09
+#&gt; At iterate     0  f=       21.299  |proj g|=      0.33594
+#&gt; At iterate     1  f =       21.239  |proj g|=        0.2966
+#&gt; At iterate     2  f =       21.215  |proj g|=       0.76838
+#&gt; At iterate     3  f =       21.206  |proj g|=       0.14353
+#&gt; At iterate     4  f =       21.206  |proj g|=      0.013429
+#&gt; At iterate     5  f =       21.206  |proj g|=    0.00027265
+#&gt; At iterate     6  f =       21.206  |proj g|=    5.0258e-07
 #&gt; 
 #&gt; iterations 6
 #&gt; function evaluations 8
 #&gt; segments explored during Cauchy searches 6
 #&gt; BFGS updates skipped 0
 #&gt; active bounds at final generalized Cauchy point 0
-#&gt; norm of the final projected gradient 1.65464e-09
-#&gt; final function value 20.9172
+#&gt; norm of the final projected gradient 5.02585e-07
+#&gt; final function value 21.2059
 #&gt; 
-#&gt; F = 20.9172
-#&gt; final  value 20.917239 
+#&gt; F = 21.2059
+#&gt; final  value 21.205949 
 #&gt; converged
-#&gt; [mbo] 3: x=2.14 : y = 8.09 : 0.0 secs : infill_ei
+#&gt; [mbo] 3: x=2.06 : y = 4.87 : 0.0 secs : infill_ei
 #&gt; 
 #&gt; optimisation start
 #&gt; ------------------
@@ -324,31 +340,59 @@ result = mbo(obj.fun, learner = learner, control = control, show.info = TRUE)
 #&gt;   - type :  matern3_2 
 #&gt;   - nugget : NO
 #&gt;   - parameters lower bounds :  1e-10 
-#&gt;   - parameters upper bounds :  16.03308 
-#&gt;   - best initial criterion value(s) :  -24.67325 
+#&gt;   - parameters upper bounds :  13.4358 
+#&gt;   - best initial criterion value(s) :  -28.29369 
 #&gt; 
 #&gt; N = 1, M = 5 machine precision = 2.22045e-16
 #&gt; At X0, 0 variables are exactly at the bounds
-#&gt; At iterate     0  f=       24.673  |proj g|=      0.75882
-#&gt; At iterate     1  f =        24.03  |proj g|=       0.61425
-#&gt; At iterate     2  f =       23.612  |proj g|=       0.43672
-#&gt; At iterate     3  f =       23.607  |proj g|=       0.22142
-#&gt; At iterate     4  f =       23.607  |proj g|=     0.0062194
-#&gt; At iterate     5  f =       23.607  |proj g|=    6.9388e-05
-#&gt; At iterate     6  f =       23.607  |proj g|=     2.234e-08
+#&gt; At iterate     0  f=       28.294  |proj g|=       1.6315
+#&gt; At iterate     1  f =       25.707  |proj g|=             0
 #&gt; 
-#&gt; iterations 6
-#&gt; function evaluations 9
-#&gt; segments explored during Cauchy searches 6
+#&gt; iterations 1
+#&gt; function evaluations 2
+#&gt; segments explored during Cauchy searches 1
+#&gt; BFGS updates skipped 0
+#&gt; active bounds at final generalized Cauchy point 1
+#&gt; norm of the final projected gradient 0
+#&gt; final function value 25.7075
+#&gt; 
+#&gt; F = 25.7075
+#&gt; final  value 25.707464 
+#&gt; converged
+#&gt; [mbo] 4: x=1.49 : y = 22.2 : 0.0 secs : infill_ei
+#&gt; 
+#&gt; optimisation start
+#&gt; ------------------
+#&gt; * estimation method   : MLE 
+#&gt; * optimisation method : BFGS 
+#&gt; * analytical gradient : used
+#&gt; * trend model : ~1
+#&gt; * covariance model : 
+#&gt;   - type :  matern3_2 
+#&gt;   - nugget : NO
+#&gt;   - parameters lower bounds :  1e-10 
+#&gt;   - parameters upper bounds :  13.4358 
+#&gt;   - best initial criterion value(s) :  -26.77505 
+#&gt; 
+#&gt; N = 1, M = 5 machine precision = 2.22045e-16
+#&gt; At X0, 0 variables are exactly at the bounds
+#&gt; At iterate     0  f=       26.775  |proj g|=      0.24803
+#&gt; At iterate     1  f =       26.774  |proj g|=      0.020612
+#&gt; At iterate     2  f =       26.774  |proj g|=    0.00051553
+#&gt; At iterate     3  f =       26.774  |proj g|=      1.11e-06
+#&gt; 
+#&gt; iterations 3
+#&gt; function evaluations 5
+#&gt; segments explored during Cauchy searches 3
 #&gt; BFGS updates skipped 0
 #&gt; active bounds at final generalized Cauchy point 0
-#&gt; norm of the final projected gradient 2.23399e-08
-#&gt; final function value 23.6066
+#&gt; norm of the final projected gradient 1.10996e-06
+#&gt; final function value 26.7739
 #&gt; 
-#&gt; F = 23.6066
-#&gt; final  value 23.606588 
+#&gt; F = 26.7739
+#&gt; final  value 26.773908 
 #&gt; converged
-#&gt; [mbo] 4: x=-0.399 : y = 18.2 : 0.0 secs : infill_ei
+#&gt; [mbo] 5: x=-1.13 : y = 4.61 : 0.0 secs : infill_ei
 #&gt; 
 #&gt; optimisation start
 #&gt; ------------------
@@ -360,94 +404,63 @@ result = mbo(obj.fun, learner = learner, control = control, show.info = TRUE)
 #&gt;   - type :  matern3_2 
 #&gt;   - nugget : NO
 #&gt;   - parameters lower bounds :  1e-10 
-#&gt;   - parameters upper bounds :  16.03308 
-#&gt;   - best initial criterion value(s) :  -27.64944 
+#&gt;   - parameters upper bounds :  13.4358 
+#&gt;   - best initial criterion value(s) :  -30.8632 
 #&gt; 
 #&gt; N = 1, M = 5 machine precision = 2.22045e-16
 #&gt; At X0, 0 variables are exactly at the bounds
-#&gt; At iterate     0  f=       27.649  |proj g|=       8.5093
-#&gt; At iterate     1  f =       27.419  |proj g|=       0.63398
-#&gt; At iterate     2  f =       26.838  |proj g|=       0.47073
-#&gt; At iterate     3  f =       26.803  |proj g|=        1.7961
-#&gt; At iterate     4  f =       26.756  |proj g|=       0.19972
-#&gt; At iterate     5  f =       26.755  |proj g|=      0.014908
-#&gt; At iterate     6  f =       26.755  |proj g|=    0.00015116
-#&gt; At iterate     7  f =       26.755  |proj g|=    1.1164e-07
+#&gt; At iterate     0  f=       30.863  |proj g|=       7.3933
+#&gt; At iterate     1  f =       30.725  |proj g|=       0.64711
+#&gt; At iterate     2  f =       30.376  |proj g|=       0.51843
+#&gt; At iterate     3  f =       30.264  |proj g|=       0.11344
+#&gt; At iterate     4  f =       30.264  |proj g|=      0.034592
+#&gt; At iterate     5  f =       30.264  |proj g|=     0.0004087
+#&gt; At iterate     6  f =       30.264  |proj g|=    1.4475e-06
 #&gt; 
-#&gt; iterations 7
+#&gt; iterations 6
 #&gt; function evaluations 10
-#&gt; segments explored during Cauchy searches 7
-#&gt; BFGS updates skipped 0
-#&gt; active bounds at final generalized Cauchy point 0
-#&gt; norm of the final projected gradient 1.11641e-07
-#&gt; final function value 26.7553
-#&gt; 
-#&gt; F = 26.7553
-#&gt; final  value 26.755343 
-#&gt; converged
-#&gt; [mbo] 5: x=1.99 : y = 3.98 : 0.0 secs : infill_ei
-#&gt; 
-#&gt; optimisation start
-#&gt; ------------------
-#&gt; * estimation method   : MLE 
-#&gt; * optimisation method : BFGS 
-#&gt; * analytical gradient : used
-#&gt; * trend model : ~1
-#&gt; * covariance model : 
-#&gt;   - type :  matern3_2 
-#&gt;   - nugget : NO
-#&gt;   - parameters lower bounds :  1e-10 
-#&gt;   - parameters upper bounds :  16.03308 
-#&gt;   - best initial criterion value(s) :  -27.94255 
-#&gt; 
-#&gt; N = 1, M = 5 machine precision = 2.22045e-16
-#&gt; At X0, 0 variables are exactly at the bounds
-#&gt; At iterate     0  f=       27.943  |proj g|=      0.59855
-#&gt; At iterate     1  f =       27.852  |proj g|=       0.56757
-#&gt; At iterate     2  f =       27.741  |proj g|=        1.5549
-#&gt; At iterate     3  f =       27.709  |proj g|=       0.32923
-#&gt; At iterate     4  f =       27.707  |proj g|=      0.029886
-#&gt; At iterate     5  f =       27.707  |proj g|=    0.00068044
-#&gt; At iterate     6  f =       27.707  |proj g|=    1.3519e-06
-#&gt; 
-#&gt; iterations 6
-#&gt; function evaluations 8
 #&gt; segments explored during Cauchy searches 6
 #&gt; BFGS updates skipped 0
 #&gt; active bounds at final generalized Cauchy point 0
-#&gt; norm of the final projected gradient 1.35189e-06
-#&gt; final function value 27.7075
+#&gt; norm of the final projected gradient 1.44747e-06
+#&gt; final function value 30.2635
 #&gt; 
-#&gt; F = 27.7075
-#&gt; final  value 27.707455 
+#&gt; F = 30.2635
+#&gt; final  value 30.263536 
 #&gt; converged
 </code></pre>
 
-<p>From this example we can easily recognize some <strong>mlrMBO</strong> essentials like parameters, learners and the control object.</p>
+<p>From this example we can easily see some <strong>mlrMBO</strong> essentials, like parameters, learners and the control object.</p>
 <p>Basically the following steps are needed to start a surrogate-based optimization with our package. 
-Each step ends with an R object, which is then passed to <code>mbo()</code>, i. e., to the working horse of mlrMBO.</p>
+Each step ends with an R object, which is then passed to <code>mbo()</code>, i.e., to the working horse of mlrMBO.</p>
 <ol>
 <li>define the objective function and its parameters by using the package <strong>smoof</strong></li>
-<li>(optionally generate an initial design)</li>
-<li>define a learner, i. e., the surrogate model</li>
-<li>set up a MBO control object, which offers a load of options</li>
+<li>generate an initial design</li>
+<li>define a learner, i.e., the surrogate model</li>
+<li>set up a MBO control object</li>
 <li>finally start the optimization</li>
 </ol>
-<p>This web page will provide you with an in-depth introduction on how to set the <code>mbo()</code> parameters depending on the desired kind of optimization.</p>
+<p>This web page will provide you with an in-depth introduction on how to set the <code>mbo()</code> parameters for different kind of optimizations.</p>
 <h1 id="objective-function">Objective Function</h1>
-<p>The first argument of <code>mbo()</code> is the name of the objective function created with the package <strong>smoof</strong>. 
-The first argument of this objective function has to be a list of values.
-The function has to return a single numerical value. 
-We demonstrate in this tutorial the optimization of two simple functions: The 5 dimensional <code>ackley function</code> (<code>objfun1</code>) and a self-constructed sine und cosine combination (<code>objfun2</code>), where we do not minimize but maximize the function. 
-<code>objfun1</code> depends on 5 numeric parameters, while <code>objfun2</code> assumes 2 numeric and 1 discrete parameters.</p>
-<p>The 5 dimensional <code>ackley function</code> can be get by using the appropriate function of the <strong>smoof</strong> package</p>
-<pre><code class="r">objfun1 = makeAckleyFunction(5) 
+<p>The first argument of <code>mbo()</code> is the the objective function created with <code>makeSingleObjectiveFunction</code> (or <code>makeMultiObjectiveFunction</code>) from the package <strong>smoof</strong>. </p>
+<p>Throughout this tutorial we demonstrate the optimization of two simple functions: </p>
+<ul>
+<li>
+<p><code>objfun1</code>: The 5 dimensional <code>ackley function</code>, which depends on 5 numeric parameters. <code>objfun1</code> should be minimized.</p>
+</li>
+<li>
+<p><code>objfun2</code>: A self-constructed sine und cosine combination, with two numeric and 1 categorical parameters. <code>objfun2</code> should be maximized. </p>
+</li>
+</ul>
+<p>The 5 dimensional <code>ackley function</code> can be generated by the appropriate function of the <strong>smoof</strong> package</p>
+<pre><code class="r">objfun1 = makeAckleyFunction(5)
+objfun1(c(1.8, 2.2, -4, 4, -5))
+#&gt; [1] 10.9365
 </code></pre>
 
-<p>The self-constructed function is built with <code>makeSingleObjetiveFunction</code>. 
-It has the attribute <code>par.set</code> that has to be a ParamSet object from the <strong>ParamHelpers</strong> package, which provides information about the parameters of the objective function and their constraints for optimization.
-We assume <code>j</code> from interval [0,1] and <code>k</code> from interval [1,2]. Parameter <code>method</code> can be either <code>"a"</code> or <code>"b"</code>.
-The type of optimization, in this case maximization, is also defined in <code>makeSingleObjetiveFunction</code> with <code>minimize = TRUE</code> as default.</p>
+<p>The self-constructed function can be built with <code>makeSingleObjetiveFunction</code>. The <code>par.set</code> argument has to be a ParamSet object from the <strong>ParamHelpers</strong> package, which provides information about the parameters of the objective function and their constraints for optimization.
+We define <code>j</code> in the interval [0,1] and <code>k</code> as an integer in {1, 2}. The Parameter <code>method</code> is categorical and can be either <code>"a"</code> or <code>"b"</code>.
+As stated, in this case we want to maximize the function. To do so we have to set <code>minimize = FALSE</code>.</p>
 <pre><code class="r">foo = function(x) {
   j = x[[1]]
   k = x[[2]]
@@ -456,103 +469,108 @@ The type of optimization, in this case maximization, is also defined in <code>ma
                sin(j) + k * cos(j))
   return(perf)
 }
+
 objfun2 = makeSingleObjectiveFunction(
   name = &quot;example&quot;,
   fn = foo,
   par.set = makeParamSet(
     makeNumericParam(&quot;j&quot;, lower = 0,upper = 1),
-    makeIntegerParam(&quot;k&quot;, lower = 1, upper = 2),
+    makeIntegerParam(&quot;k&quot;, lower = 1L, upper = 2L),
     makeDiscreteParam(&quot;method&quot;, values = c(&quot;a&quot;, &quot;b&quot;))
   ),
   has.simple.signature = FALSE,
   minimize = FALSE
 )
+
+objfun2(list(j = 0.5, k = 1L, method = &quot;a&quot;))
+#&gt; [1] 1.357008
 </code></pre>
 
 <h1 id="initial-design">Initial Design</h1>
 <p>The second argument of the <code>mbo()</code> function - <code>design</code> - is the initial design with default setting <code>NULL</code>.</p>
-<p>It is recommendable to use the <code>generateDesign</code> function from <strong>ParamHelpers</strong> package to create it.
-However, if special designs are desired (e.g., orthogonal designs), its interface has to be the same as the interface of the <code>generateDesign</code> objects. 
-Particular attention has to be paid to the setting of the <code>trafo</code> attribute.</p>
+<p>An easy (and recommended) way to create an initial design is to use the <code>generateDesign</code> function from the <strong>ParamHelpers</strong> package. If the default settings are used (i.e. <code>design = NULL</code>) a Random Latin Hypercube <code>lhs::randomLHS</code> design is used with 4 times the number of parameters the objective function has. Other possibilities to generate designs are for example <code>generateGridDesign</code> and <code>generateRandomDesign</code>. </p>
+<p><em>Note:</em> If special designs are desired (e.g., orthogonal designs), its interface has to be the same as the interface of the <code>generateDesign</code> objects. </p>
+<p>For <code>objfun1</code> and <code>objfun2</code> we create a slightly larger number of initial points than the default suggests. For <code>objfun1</code> we use Random Latin Hypercube sampling and for <code>objfun2</code> the Maximin Latin Hypercube sampling. The parameters of the sampling design have to be specified in a list and supplied via <code>fun.args</code>.</p>
 <pre><code class="r">init.points1 = 5 * sum(ParamHelpers::getParamLengths(smoof::getParamSet(objfun1)))
-# NOTE:
-# init.points1 = 5 * getParamLengths(getParamSet(objfun1))
-# is not working, because mlr::getParamSet() is used by default.
-init.fun1 = randomLHS
+
 set.seed(1)
-design1 = generateDesign(n = init.points1, par.set = smoof::getParamSet(objfun1), fun = init.fun1, trafo = FALSE)
+design1 = generateDesign(n = init.points1, par.set = smoof::getParamSet(objfun1), fun = randomLHS, trafo = FALSE)
 
 init.points2 = 5 * sum(ParamHelpers::getParamLengths(smoof::getParamSet(objfun2)))
-init.fun2 = maximinLHS
-init.args2 = list(k = 3, dup = 4)
-design2 = generateDesign(n = init.points2, par.set = smoof::getParamSet(objfun2), fun.args = init.args2, fun = init.fun2, trafo = FALSE)
+design2 = generateDesign(n = init.points2, par.set = smoof::getParamSet(objfun2), fun.args = list(k = 3, dup = 4), fun = maximinLHS, trafo = FALSE)
 </code></pre>
 
 <h1 id="surrogate-model">Surrogate Model</h1>
-<p>Attribute <code>learner</code> of the <code>mbo()</code> function allows us to choose an appropriate surrogate model for the parameter optimization.
-It can be easily done using the <code>makeLearner</code> function from <strong>mlr</strong> package.
-List of implemented learners can be seen using the ?learners command or on <code>http://mlr-org.github.io/mlr-tutorial/release/html/integrated_learners/</code>
-<!-- NEW -->
-The choice of the surrogate model depends on the parameter set of the objective function.
-While kriging models are advisable for the numeric parameters, random forest models can be used if at least one parameter is factorial.
+<p>The attribute <code>learner</code> of the <code>mbo()</code> function allows us to choose an appropriate surrogate model for the parameter optimization. Different learners can easily created using the <code>makeLearner</code> function from the <strong>mlr</strong> package.
+List of implemented learners can be seen using the <code>listlearners()</code> function or on the <a href="http://mlr-org.github.io/mlr-tutorial/release/html/integrated_learners/">mlr wiki</a>.</p>
+<p>The choice of the surrogate model depends on the parameter set of the objective function.
+While kriging models (gaussian processes) are advisable if all parameters are numeric, they cannot be used if the objective function contains categorical parameters. If at least one parameter is categorical, random forest models can be used as surrogate models. The default kriging model is from the <strong>DiceKriging</strong> package and uses the <code>matern5_2</code>covariance kernel.
 In our example we consider these two surrogate models:
-<code>kriging</code> for optimizing of <code>objfun1</code>  and <code>random forest</code> for <code>objfun2</code>.</p>
-<pre><code class="r">learner_km = makeLearner(&quot;regr.km&quot;, predict.type = &quot;se&quot;, covtype = &quot;matern3_2&quot;)
-learner_rf = makeLearner(&quot;regr.randomForest&quot;)
+<code>kriging</code> for optimizing of <code>objfun1</code> and <code>random forest</code> for <code>objfun2</code>.</p>
+<pre><code class="r">surr.km = makeLearner(&quot;regr.km&quot;, predict.type = &quot;se&quot;, covtype = &quot;matern3_2&quot;)
+surr.rf = makeLearner(&quot;regr.randomForest&quot;)
 </code></pre>
 
-<p>However, in some cases it is necessary to modify the learners (e.g., in order to get the standard error prediction for design points).
-This will be discussed und illustrated in the section "Experiments and Output".</p>
+<p>Further modification of the learner (e.g., in order to get standard error prediction for design points) will be discussed und illustrated in the section <em>Experiments and Output</em>.</p>
 <h1 id="mbocontrol">MBOControl</h1>
-<p>The <code>MBOControl</code> object can be created with <code>makeMBOControl</code> and some attributes can be set when creating it.
-But there are also further functions to define or change the settings of the object:  </p>
-<h1 id="setmbocontrolinfill"><code>setMBOControlInfill</code></h1>
-<h2 id="attribute-crit">Attribute <code>crit</code></h2>
-<p>One of the most important issues is to define how the next design points in the sequential loops have to be chosen. 
-Firstly, we have to choose the infill criterion using the  <code>crit</code> attribute of <code>setMBOControlInfill</code>.
-At the moment five possibilities are implemented:
-<em> <code>mean</code>: mean response of the surrogate model,
-</em> <code>ei</code>: expected improvement of the surrogate model,
-<em> <code>aei</code>: augmented expected improvement, which is especially useful for the noisy functions,
-</em> <code>eqi</code>: expected quantile improvement
-* <code>cb</code>: confidence bound which is the additive combination of mean response and mean standard error estimation of the surrogate model (response - lambda * standard.error). 
-The default value of lambda is 1, but it can easily be changed by
-the <code>crit.cb.lambda</code> attribute.</p>
-<h2 id="attribute-opt">Attribute <code>opt</code></h2>
-<p>The attribute <code>opt</code> sets how the next point to evaluate should be proposed given an infill criterion. 
-The possibilities are <code>focussearch</code>, <code>cmaes</code>, <code>ea</code> and <code>nsga2</code>.</p>
-<p>If <code>focussearch</code> is chosen, the common procedure is as follows: 
-in the first step an lhs design is sampled in the parameter space (by <code>randomLHS</code> function) and the design point with the best  prediction of the infill criterion is determined. 
-User can set the size of this design by the <code>opt.focussearch.points</code> attribute (default value is 10000). 
-In the second step the parameter space is shrunk around the best design point in a certain way which should not be discussed in detail here. 
-First and second steps are repeated iteratively <code>opt.focussearch.maxit</code> times (default is 5) while the best seen value of the infill criterion is passed back.</p>
-<p>If <code>opt</code> is <code>cmaes</code>, the point, which optimizes the
-infill criterion, is chosen via <code>cma_es</code> function of  <strong>cmaes</strong> package. Control argument for <code>cmaes</code> optimizer can be provided in
-the <code>opt.cmaes.control</code> attribute (default is empty list).</p>
-<p>If <code>opt</code> is <code>ea</code> a simple (mu+1)-evolutionary optimization algorithm is used to optimize the infill criterion.
-The population size mu can be set by the <code>opt.ea.mu</code> attribute (default value is 10).
-(mu+1) means that in each population only one child is generated using crossover und mutation operators (from <strong>emao</strong> package).</p>
-<p>The parameters <code>eta</code> and <code>p</code> of the latter two operators can be adjusted via the attributes <code>opt.ea.sbx.eta</code>, <code>opt.ea.sbx.p</code>,
-<code>opt.ea.pm.eta</code> and <code>opt.ea.pm.p</code>.
-The default number of EA iterations is 500 and can be changed by <code>opt.ea.maxit</code> attribute.</p>
-<p>For multi objective optimization, <code>opt</code> should be set to <code>nsga2</code>. 
-This is needed for mspot.
-<!-- FIXME informations about "nsga2" --></p>
-<p>As all four infill optimization strategies do not guarantee  to find the global optimum, users can set the number of restarts by the <code>opt.restarts</code> attribute (default value is 1).
+<p>The <code>MBOControl</code> object controls the fitting process and is created with <code>makeMBOControl</code>. General control arguments can be set when creating it (e.g. the number of objectives (<code>n.objectives</code>), the number of points to propose in each iteration (<code>propose.points</code>), how the final point is proposed (<code>final.method</code>) etc.).
+To further adapt the optimization, additional control functions are used to define or change settings of the object:  </p>
+<h2 id="mbocontrolinfill">MBOControlInfill</h2>
+<p>With <code>setMBOControlInfill</code> a <code>MBOControl</code> object can be extended with infill criteria and infill optimizer options.</p>
+<h3 id="argument-crit">Argument <em>crit</em></h3>
+<p>One of the most important questions is to define how the next design points in the sequential loop are chosen. 
+5 different possibilities can be set via the <code>crit</code> argument in <code>setMBOControlInfill</code>:</p>
+<ul>
+<li><code>mean</code>: mean response of the surrogate model</li>
+<li><code>ei</code>: expected improvement of the surrogate model</li>
+<li><code>aei</code>: augmented expected improvement, which is especially useful for the noisy functions</li>
+<li><code>eqi</code>: expected quantile improvement</li>
+<li><code>cb</code>: confidence bound, which is the additive combination of mean response and mean standard error estimation of the surrogate model (response - lambda * standard.error)</li>
+</ul>
+<p>The parameters of the different criteria are set via further arguments (e.g. <code>crit.cb.lambds</code> for the lambda parameter if <code>crit = cb</code>) </p>
+<h3 id="argument-opt">Argument <em>opt</em></h3>
+<p>The argument <code>opt</code> sets how the next point to evaluate should be proposed given an infill criterion. 
+The possibilities are:</p>
+<ul>
+<li><code>focussearch</code>: Firstly a Latin Hypercube design of size <code>opt.focussearch.points</code> (default 10000) is sampled in the parameter space (by <code>randomLHS</code>) and the design point with the best prediction of the infill criterion is determined. Then, the parameter space is shrunk around the best design point. This process is repeated <code>opt.focussearch.maxit</code> (default 5) times and the best seen value of the infill criterion is passed back.</li>
+<li><code>cmaes</code>: The optimal point is found with a covariance matrix adapting evolutionary strategy from the <strong>cmaes</strong> package. If the run fails, a random point is generated and a warning is given. Further control arguments can be provided in <code>opt.cmaes.control</code> as a list. </li>
+<li><code>ea</code>: Use an evolutionary multiobjective optimization algorithm from the package <strong>emoa</strong> to determine the best point. The population size mu can be set by  <code>opt.ea.mu</code> (default value is 10). (mu+1) means that in each population only one child is generated using crossover und mutation operators. The parameters <code>eta</code> and <code>p</code> of the latter two operators can be adjusted via the attributes <code>opt.ea.sbx.eta</code>, <code>opt.ea.sbx.p</code>,<code>opt.ea.pm.eta</code> and <code>opt.ea.pm.p</code>. The default number of EA iterations is 500 and can be changed by <code>opt.ea.maxit</code> attribute.</li>
+<li><code>nsga2</code>: Use the non-dominated sorting genetic algorithm from the package <strong>nsga2R</strong> to determine the best point. This algorithm should be used for <a href="multipoint.md">multi object optimization</a>.</li>
+</ul>
+<p>As all four infill optimization strategies do not guarantee to find the global optimum, users can set the number of restarts by the <code>opt.restarts</code> argument (default value is 1).
 After conducting the desired number of restarts the design point with the best infill criterion value is passed back to the MBO loop.</p>
-<p>Please note that just <code>focussearch</code> optimizer is suitable for the case of factor parameters in the parameter set!</p>
-<h1 id="further-functions">Further functions</h1>
-<p>The number of sequential steps (iterations) can be set via the attribute <code>iters</code> of the function <code>setMBOControlTermination</code> (default setting is 10).</p>
-<p>There are also many other functions and attributes which user can set in a desired way...
-<!-- FIXME further informations about setMBOControl... functions here ? -->
-<!-- like how often should the surrogate model be stored or resampled during the optimization. -->
-The list of all attributes is provided in the software documentation.
-<!-- Let us construct <code>mboControl</code> objects for our two object functions. --></p>
+<p><em>Note:</em> Only the <code>focussearch</code> optimizer is suitable for for categorical parameters in the parameter set.</p>
+<h2 id="setmbocontroltermination">setMBOControlTermination</h2>
+<p>With this control function different criteria to stop the fitting process can be specified. You can set multiple different criteria and the first one that is met will terminate the fitting process.
+You can set: </p>
+<ul>
+<li><code>iters</code>: The maximum number of iterations</li>
+<li><code>time.budget</code>: A maximum running time in seconds with</li>
+<li><code>target.fun.value</code>: A treshold for function evaluation (stop if a evaluation is better than a given value)</li>
+<li><code>max.evals</code>: The maximum number of function evaluations</li>
+</ul>
+<p><em>Note:</em> You can also easily create your own stopping condition(s).</p>
+<h2 id="setmbocontrolmultipoint">setMBOControlMultiPoint</h2>
+<p>This extends a MBO control object with options for multipoint proposal. Multipoint proposal means, that multiple infill points are suggested and evaluated, which is especially useful in parallel batch evaluation. For a detailed introduction, check the <a href="multipoint.md">multi-point tutorial</a>.</p>
+<h3 id="argument-method">Argument: <em>method</em></h3>
+<p>Define the method used for multipoint proposals, currently 3 different methods are supported:</p>
+<ul>
+<li><code>cb</code>: Proposes multiple points by optimizing the confidence bound criterion <code>propose.points</code> times. Generally this works the same way as for the single point case, i.e. specify <code>infill.opt</code>. The  lambda parameters are drawn from an exp(1)-distribution.</li>
+<li><code>multicrit</code>: Use a evolutionary multicriteria optimization. This is a (mu+1) type evolutionary algorithm and runs for <code>multicrit.maxit</code> generations. The population size is set to <code>propose.points</code>.</li>
+<li><code>cl</code>: Proposes points by the constant liar strategy, which only makes sense if the confidence bound criterion is used as an infill criterion. In the first step the surrugate model is fitted based on the real data and the best point is calculated accordingly. Then, the function value of the best point is simply guessed by the worst seen function evaluation. This lie is used to update the model in order to propose subsequent point. The procedure is applied until the number of points is <code>propose.points</code>.</li>
+</ul>
+<h2 id="setmbocontrolmultifid">setMBOControlMultiFid</h2>
+<p>Add multi-fidelity options to the <code>MBOControl</code> control object. This is useful when certain parameters increase the performance as well as the calculation cost. The idea is to combine the optimization of fast fitting low-fidelity models and more accurate but expensive high-fidelity models. The parameter on which the fidelity depends on is specified as <code>param</code> and the order of the values to train the learner with in <code>lvls</code>. The costs for the different levels can be specified or estimated by a model based on the execution time of the currently evaluated points.  </p>
+<h2 id="setmbocontrolmulticrit">setMBOControlMultiCrit</h2>
+<p>This adds multi-criteria optimization specific options to the control object. For details see the tutorial page on <a href="multicrit.md">multi-criteria optimization</a>.</p>
+<p>The list of all attributes is provided in the software documentation.</p>
+<h1 id="experiments-and-output">Experiments and Output</h1>
+<p>Now we will apply the mbo() function to optimize the two objective functions.</p>
 <pre><code class="r">control1 = makeMBOControl()
 control1 = setMBOControlInfill(
   control = control1,
   crit = &quot;ei&quot;,
-  opt = &quot;cmaes&quot;
+  opt = &quot;focussearch&quot;
 )
 control1 = setMBOControlTermination(
   control = control1,
@@ -571,74 +589,201 @@ control2 = setMBOControlTermination(
 )
 </code></pre>
 
-<h1 id="experiments-and-output">Experiments and Output</h1>
-<p>Now we will apply the mbo() function to optimize the two objective functions.</p>
-<h2 id="optimization-of-objfun1">Optimization of <code>objfun1</code></h2>
-<!-- FIXME??? Optimization has a long computation time -->
-
-<pre><code class="r">mbo1 = mbo(objfun1, design = design1, learner = learner_km, control = control1, show.info = TRUE)
-mbo1
-getOptPathY(mbo1$opt.path, &quot;y&quot;) # get all y values
-
+<h2 id="optimization-of-objfun1">Optimization of objfun1</h2>
+<pre><code class="r">mbo1 = mbo(objfun1, design = design1, learner = surr.km, control = control1, 
+           show.info = FALSE)
 </code></pre>
 
-<p>The output of mbo function is a structure of several variables. The most important are:</p>
+<pre><code class="r">mbo1
+#&gt; Recommended parameters:
+#&gt; x=1.03,-11.1,-2.17,8.79,-0.205
+#&gt; Objective: y = 15.517
+#&gt; 
+#&gt; Optimization path
+#&gt; 25 + 10 entries in total, displaying last 10 (or less):
+#&gt;              x1        x2         x3        x4          x5        y dob
+#&gt; 26  -4.12605695 -11.54782 -5.6561831 10.981043  0.97068084 17.24931   1
+#&gt; 27  -4.08285380 -12.35181 -7.4694699 30.601857  2.35503836 21.12274   2
+#&gt; 28  -3.63459848 -11.16748 -0.2215530  9.728138 -0.59150240 16.78718   3
+#&gt; 29   5.57099943 -10.94766  6.4746657  8.850323 -1.46103227 17.39163   4
+#&gt; 30  -5.86468716 -10.71919 21.1616368  9.390592 -2.57240184 19.94265   5
+#&gt; 31  17.32988712  -9.19084 -1.3564536  8.747120 -0.67130885 19.02134   6
+#&gt; 32 -15.19605365 -11.42044 -0.7151403  8.628104 -4.72241544 19.05059   7
+#&gt; 33  20.40116345 -11.35839  0.1671055  8.996293  0.07495621 19.37707   8
+#&gt; 34  -0.09598261 -11.03762 -0.2741146  9.177053 -0.53188528 15.93757   9
+#&gt; 35   1.02545547 -11.14438 -2.1749602  8.793208 -0.20463488 15.51709  10
+#&gt;    eol error.message exec.time          ei error.model train.time
+#&gt; 26  NA          &lt;NA&gt;     0.000 -0.13572183        &lt;NA&gt;      0.051
+#&gt; 27  NA          &lt;NA&gt;     0.000 -0.04343611        &lt;NA&gt;      0.055
+#&gt; 28  NA          &lt;NA&gt;     0.001 -0.06930553        &lt;NA&gt;      0.071
+#&gt; 29  NA          &lt;NA&gt;     0.000 -0.07111303        &lt;NA&gt;      0.095
+#&gt; 30  NA          &lt;NA&gt;     0.000 -0.04882831        &lt;NA&gt;      0.056
+#&gt; 31  NA          &lt;NA&gt;     0.000 -0.05262250        &lt;NA&gt;      0.056
+#&gt; 32  NA          &lt;NA&gt;     0.000 -0.04465761        &lt;NA&gt;      0.064
+#&gt; 33  NA          &lt;NA&gt;     0.000 -0.07328187        &lt;NA&gt;      0.128
+#&gt; 34  NA          &lt;NA&gt;     0.000 -0.15297708        &lt;NA&gt;      0.043
+#&gt; 35  NA          &lt;NA&gt;     0.000 -0.09966843        &lt;NA&gt;      0.134
+#&gt;    prop.type propose.time exec.timestamp        se     mean
+#&gt; 26 infill_ei        1.311     1464944931 0.1701271 19.75186
+#&gt; 27 infill_ei        1.378     1464944933 0.2315570 17.37290
+#&gt; 28 infill_ei        1.213     1464944935 0.2334914 17.30166
+#&gt; 29 infill_ei        1.396     1464944936 0.1798618 16.78846
+#&gt; 30 infill_ei        1.373     1464944938 0.2711088 16.93882
+#&gt; 31 infill_ei        1.391     1464944940 0.3026688 16.96312
+#&gt; 32 infill_ei        1.418     1464944942 0.2836455 16.96928
+#&gt; 33 infill_ei        1.432     1464944943 0.3412791 16.93965
+#&gt; 34 infill_ei        1.487     1464944945 0.1966018 16.66667
+#&gt; 35 infill_ei        1.395     1464944947 0.1522894 15.87113
+</code></pre>
+
+<p>The default output of mbo contains the best found parameter set and the optimzation path. The <code>MBOResult</code> object contains additional information, most importanty:</p>
 <ul>
-<li>x: the best point of the parameter space</li>
-<li>y: the associated best value of the objective function</li>
-<li>opt.path: optimization path. See <strong>ParamHelpers</strong> for further information.</li>
-<li>models: If no other setting were provided in the <code>MBOControl</code> object, the last estimated surrogate is given here.</li>
+<li><code>x</code>: The best point of the parameter space</li>
+<li><code>y</code>: The associated best value of the objective function</li>
+<li><code>opt.path</code>: The optimization path. See <code>?ParamHelpers::OptPath</code> for further information.</li>
+<li><code>models</code>: Depending on <code>store.model.at</code> in the <code>MBOControl</code> object, this contains zero, one or multiple surrogate models (default is to save the model generated after the last iteration).</li>
 <li>...</li>
 </ul>
-<!-- FIXME: get optimization path as data.frame !-->
-
-<p>We can also change some attributes of the <code>MBOControl</code> object and run mbo() function again</p>
-<pre><code class="r">control1$infill.crit = &quot;mean&quot;
-control1$infill.opt = &quot;focussearch&quot;
-mbo1 = mbo(objfun1, design = design1, learner = learner_km, control = control1, show.info = FALSE)
-mbo1$y
+<p>We can also change some arguments of the <code>MBOControl</code> object and run <code>mbo()</code> again:</p>
+<pre><code class="r">control1$infill.crit = &quot;cb&quot;
+control1$iters = 5L
+mbo1 = mbo(objfun1, design = design1, learner = surr.km, control = control1, show.info = FALSE)
 </code></pre>
 
-<h2 id="optimization-of-objfun2">Optimization of <code>objfun2</code></h2>
-<p>Let us apply <strong>mlrMBO</strong> package to optimize object2 function, which contains one factor variable.
-We have already mentioned before that in this case just the <code>focussearch</code> infill optimization function is suitable.
-If we use <code>mean</code> as infill criterion any kind of model which can handle with factor variables can be used here (like random tree, random forest, linear model and many others).</p>
-<pre><code class="r">mbo2 = mbo(objfun2, design = design2, learner = learner_rf, control = control2, show.info = FALSE)
-mbo2$y
+<pre><code class="r">mbo1
+#&gt; Recommended parameters:
+#&gt; x=0.555,-6.83,6.51,4.35,-1.98
+#&gt; Objective: y = 14.150
+#&gt; 
+#&gt; Optimization path
+#&gt; 25 + 10 entries in total, displaying last 10 (or less):
+#&gt;            x1         x2        x3         x4         x5        y dob eol
+#&gt; 26 -4.6202804 -10.307607 16.870109   5.583554  -5.838394 19.02196   1  NA
+#&gt; 27 -4.6471192 -13.116119 27.086733  17.835397 -10.658748 20.76526   2  NA
+#&gt; 28 -7.2288110 -10.883809 23.025155   4.371716  -5.586849 19.92917   3  NA
+#&gt; 29 -4.3568261 -15.236885 26.828895   5.941049  -6.683645 20.52021   4  NA
+#&gt; 30  4.0754507 -10.199311 13.723630   4.539547 -11.181502 18.64589   5  NA
+#&gt; 31 22.2615423  -8.420510 12.101165   4.913087 -17.755816 20.45866   6  NA
+#&gt; 32  6.5055626 -10.197154 10.433297  14.087065 -22.152559 20.46904   7  NA
+#&gt; 33  0.1582629  -7.663526 12.009755   4.105232  -3.323199 16.26470   8  NA
+#&gt; 34  0.1181351  -7.649562 11.368898 -11.688711  -2.412261 18.07821   9  NA
+#&gt; 35  0.5549428  -6.827755  6.507281   4.347422  -1.982138 14.14984  10  NA
+#&gt;    error.message exec.time       cb error.model train.time prop.type
+#&gt; 26          &lt;NA&gt;         0 19.65947        &lt;NA&gt;      0.047 infill_cb
+#&gt; 27          &lt;NA&gt;         0 18.90914        &lt;NA&gt;      0.059 infill_cb
+#&gt; 28          &lt;NA&gt;         0 18.92139        &lt;NA&gt;      0.041 infill_cb
+#&gt; 29          &lt;NA&gt;         0 18.93866        &lt;NA&gt;      0.083 infill_cb
+#&gt; 30          &lt;NA&gt;         0 18.82714        &lt;NA&gt;      0.041 infill_cb
+#&gt; 31          &lt;NA&gt;         0 18.48476        &lt;NA&gt;      0.065 infill_cb
+#&gt; 32          &lt;NA&gt;         0 18.50289        &lt;NA&gt;      0.081 infill_cb
+#&gt; 33          &lt;NA&gt;         0 18.42454        &lt;NA&gt;      0.060 infill_cb
+#&gt; 34          &lt;NA&gt;         0 16.11724        &lt;NA&gt;      0.064 infill_cb
+#&gt; 35          &lt;NA&gt;         0 16.10702        &lt;NA&gt;      0.105 infill_cb
+#&gt;    propose.time exec.timestamp        se     mean lambda
+#&gt; 26        1.304     1464944949 0.1837239 19.84319      1
+#&gt; 27        1.232     1464944951 0.1712301 19.08037      1
+#&gt; 28        1.401     1464944952 0.1575612 19.07895      1
+#&gt; 29        1.281     1464944954 0.1379985 19.07666      1
+#&gt; 30        1.342     1464944956 0.1967692 19.02391      1
+#&gt; 31        1.415     1464944957 0.1810977 18.66586      1
+#&gt; 32        1.446     1464944959 0.1946998 18.69759      1
+#&gt; 33        1.398     1464944961 0.2214879 18.64603      1
+#&gt; 34        1.384     1464944963 0.2650294 16.38227      1
+#&gt; 35        1.399     1464944964 0.2213947 16.32841      1
 </code></pre>
 
-<p>In contrast, if one will apply <code>ei</code> or <code>cb</code> infill criteria,
-the <code>predict.type</code> attribute of the learner have be set to <code>se</code>, if possible. A list of regression learners which support it can be viewed by:</p>
-<pre><code class="r">#listLearners(type = &quot;regr&quot;, se = TRUE)
+<h2 id="optimization-of-objfun2">Optimization of objfun2</h2>
+<p>Now let us use <strong>mlrMBO</strong> to optimize <code>objfun2</code>, which contains one categorical variable.
+As we have already mentioned before, in case of factor variables only <code>focussearch</code> is suitable and kriging cannot be used as a surrogate model.
+If we would use <code>mean</code> as the infill criterion, any kind of model which can handle factors variables is possible (like regression trees, random forests, linear models and many others).</p>
+<pre><code class="r">mbo2 = mbo(objfun2, design = design2, learner = surr.rf, control = control2, show.info = FALSE)
 </code></pre>
 
-<!-- If no comment here, we get a lot warning message !-->
+<pre><code class="r">mbo2
+#&gt; Recommended parameters:
+#&gt; j=0.462; k=2; method=b
+#&gt; Objective: y = 2.236
+#&gt; 
+#&gt; Optimization path
+#&gt; 15 + 10 entries in total, displaying last 10 (or less):
+#&gt;            j k method        y dob eol error.message exec.time      mean
+#&gt; 16 0.4757427 2      b 2.235904   1  NA          &lt;NA&gt;         0 -2.026581
+#&gt; 17 0.4849609 2      b 2.235560   2  NA          &lt;NA&gt;         0 -2.082962
+#&gt; 18 0.4717123 2      b 2.235995   3  NA          &lt;NA&gt;         0 -2.119596
+#&gt; 19 0.4777613 2      b 2.235845   4  NA          &lt;NA&gt;         0 -2.138953
+#&gt; 20 0.4674350 2      b 2.236052   5  NA          &lt;NA&gt;         0 -2.152694
+#&gt; 21 0.4660672 2      b 2.236061   6  NA          &lt;NA&gt;         0 -2.161759
+#&gt; 22 0.4622545 2      b 2.236066   7  NA          &lt;NA&gt;         0 -2.172939
+#&gt; 23 0.4673248 2      b 2.236053   8  NA          &lt;NA&gt;         0 -2.174135
+#&gt; 24 0.4533910 2      b 2.235950   9  NA          &lt;NA&gt;         0 -2.175038
+#&gt; 25 0.4587362 2      b 2.236041  10  NA          &lt;NA&gt;         0 -2.187947
+#&gt;    error.model train.time   prop.type propose.time exec.timestamp
+#&gt; 16        &lt;NA&gt;      0.008 infill_mean        0.517     1464944965
+#&gt; 17        &lt;NA&gt;      0.006 infill_mean        0.524     1464944966
+#&gt; 18        &lt;NA&gt;      0.007 infill_mean        0.515     1464944967
+#&gt; 19        &lt;NA&gt;      0.007 infill_mean        0.534     1464944968
+#&gt; 20        &lt;NA&gt;      0.006 infill_mean        0.515     1464944969
+#&gt; 21        &lt;NA&gt;      0.007 infill_mean        0.521     1464944969
+#&gt; 22        &lt;NA&gt;      0.007 infill_mean        0.521     1464944970
+#&gt; 23        &lt;NA&gt;      0.008 infill_mean        0.522     1464944971
+#&gt; 24        &lt;NA&gt;      0.008 infill_mean        0.522     1464944972
+#&gt; 25        &lt;NA&gt;      0.008 infill_mean        0.541     1464944973
+</code></pre>
 
-<p>We hence modify the random forest learner and optimize <code>objfun2</code> by <code>ei</code> infill criterion.</p>
+<p>If we want to use the expected improvement <code>ei</code> or (lower) confidence bound <code>cb</code> infill criteria, the <code>predict.type</code> attribute of the learner has be set to <code>se</code>. A list of regression learners which support it can be viewed by:</p>
+<pre><code class="r">listLearners(obj = &quot;regr&quot;, properties = &quot;se&quot;)
+</code></pre>
+
+<p>We modify the random forest to predict the standard error and optimize <code>objfun2</code> by the <code>ei</code> infill criterion.</p>
 <pre><code class="r">learner_rf = makeLearner(&quot;regr.randomForest&quot;, predict.type = &quot;se&quot;)
 control2$infill.crit = &quot;ei&quot;
-mbo2 = mbo(objfun2, design = design2, learner = learner_rf, control = control2, show.info = FALSE)
-mbo2$y
+mbo2 = mbo(objfun2, design = design2, learner = learner_rf, 
+           control = control2, show.info = FALSE)
 </code></pre>
 
-<p>Finally, if a learner, which does not support the <code>se</code> prediction type, should be applied for the optimization with <code>ei</code> infill criterion, there is a possibility to create a bagging model with the desired characteristics. 
-The attribute <code>bw.iters</code> provides the number of models in the ensemble, see documentation for <code>makeBaggingWrapper</code> of <strong>mlr</strong> package.</p>
-<pre><code class="r">learner_rt = makeLearner(&quot;regr.rpart&quot;)
-bag_rt = makeBaggingWrapper(learner_rt, bw.iters = 5)
-bag_rt = setPredictType(bag_rt, predict.type = &quot;se&quot;)
-mbo2 = mbo(objfun2, design = design2, learner = bag_rt, control = control2, show.info = FALSE)
-mbo2$y
+<pre><code class="r">mbo2
+#&gt; Recommended parameters:
+#&gt; j=0.428; k=2; method=b
+#&gt; Objective: y = 2.235
+#&gt; 
+#&gt; Optimization path
+#&gt; 15 + 10 entries in total, displaying last 10 (or less):
+#&gt;            j k method        y dob eol error.message exec.time
+#&gt; 16 0.4087665 2      b 2.232701   1  NA          &lt;NA&gt;         0
+#&gt; 17 0.4087998 2      b 2.232705   2  NA          &lt;NA&gt;         0
+#&gt; 18 0.4033413 2      b 2.232003   3  NA          &lt;NA&gt;         0
+#&gt; 19 0.3865188 2      b 2.229420   4  NA          &lt;NA&gt;         0
+#&gt; 20 0.3744102 2      b 2.227171   5  NA          &lt;NA&gt;         0
+#&gt; 21 0.3983756 2      b 2.231306   6  NA          &lt;NA&gt;         0
+#&gt; 22 0.3475329 2      b 2.221011   7  NA          &lt;NA&gt;         0
+#&gt; 23 0.3283410 2      b 2.215630   8  NA          &lt;NA&gt;         0
+#&gt; 24 0.3200959 2      b 2.213068   9  NA          &lt;NA&gt;         0
+#&gt; 25 0.3247575 2      b 2.214535  10  NA          &lt;NA&gt;         0
+#&gt;              ei error.model train.time prop.type propose.time
+#&gt; 16 -0.001032499        &lt;NA&gt;      0.174 infill_ei       34.013
+#&gt; 17 -0.003238726        &lt;NA&gt;      0.190 infill_ei       31.291
+#&gt; 18 -0.002051443        &lt;NA&gt;      0.173 infill_ei       31.707
+#&gt; 19 -0.002915200        &lt;NA&gt;      0.217 infill_ei       31.168
+#&gt; 20 -0.002450279        &lt;NA&gt;      0.207 infill_ei       31.175
+#&gt; 21 -0.002619635        &lt;NA&gt;      0.175 infill_ei       31.820
+#&gt; 22 -0.004576781        &lt;NA&gt;      0.210 infill_ei       32.282
+#&gt; 23 -0.005052992        &lt;NA&gt;      0.187 infill_ei       31.942
+#&gt; 24 -0.003741054        &lt;NA&gt;      0.181 infill_ei       31.752
+#&gt; 25 -0.004406909        &lt;NA&gt;      0.185 infill_ei       32.442
+#&gt;    exec.timestamp         se     mean
+#&gt; 16     1464945008 0.14104875 1.944803
+#&gt; 17     1464945040 0.14306666 2.004142
+#&gt; 18     1464945072 0.10511671 2.058761
+#&gt; 19     1464945104 0.13876233 2.006720
+#&gt; 20     1464945136 0.09833344 2.080229
+#&gt; 21     1464945168 0.08121638 2.116259
+#&gt; 22     1464945201 0.10829462 2.090093
+#&gt; 23     1464945234 0.12091591 2.072615
+#&gt; 24     1464945266 0.10710490 2.082343
+#&gt; 25     1464945299 0.08455944 2.130153
 </code></pre>
 
-<!--
- TODO
-
-1) noisy optimization example
-
-2) mulicrit
-
-3) multipoint
-!--></div>
+<p>Finally, if a learner, which does not support the <code>se</code> prediction type, should be applied for the optimization with the <code>ei</code> infill criterion, it is  possible to create a bagging model with the desired characteristics. For details on how to do it take a look at the <a href="https://mlr-org.github.io/mlr-tutorial/devel/html/bagging/index.html">bagging section</a> in the <code>mlr</code> tutorial.</p></div>
             
         </div>
 
