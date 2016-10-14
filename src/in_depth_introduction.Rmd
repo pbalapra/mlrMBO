@@ -96,13 +96,13 @@ _Note:_ If special designs are desired (e.g., orthogonal designs), its interface
 
 For ``objfun1`` and ``objfun2`` we create a slightly larger number of initial points than the default suggests. For ``objfun1`` we use Random Latin Hypercube sampling and for ``objfun2`` the Maximin Latin Hypercube sampling. The parameters of the sampling design have to be specified in a list and supplied via ``fun.args``.
 ```{r}
-init.points1 = 5 * sum(ParamHelpers::getParamLengths(smoof::getParamSet(objfun1)))
+init.points1 = 5 * sum(ParamHelpers::getParamLengths(getParamSet(objfun1)))
 
 set.seed(1)
-design1 = generateDesign(n = init.points1, par.set = smoof::getParamSet(objfun1), fun = randomLHS, trafo = FALSE)
+design1 = generateDesign(n = init.points1, par.set = getParamSet(objfun1), fun = randomLHS, trafo = FALSE)
 
-init.points2 = 5 * sum(ParamHelpers::getParamLengths(smoof::getParamSet(objfun2)))
-design2 = generateDesign(n = init.points2, par.set = smoof::getParamSet(objfun2), fun.args = list(k = 3, dup = 4), fun = maximinLHS, trafo = FALSE)
+init.points2 = 5 * sum(ParamHelpers::getParamLengths(getParamSet(objfun2)))
+design2 = generateDesign(n = init.points2, par.set = getParamSet(objfun2), fun.args = list(k = 3, dup = 4), fun = maximinLHS, trafo = FALSE)
 ```
 
 

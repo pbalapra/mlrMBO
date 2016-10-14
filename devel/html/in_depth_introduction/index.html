@@ -199,13 +199,6 @@
 #&gt; Loading required package: smoof
 #&gt; Loading required package: checkmate
 #&gt; 
-#&gt; Attaching package: 'smoof'
-#&gt; The following object is masked from 'package:mlr':
-#&gt; 
-#&gt;     getParamSet
-#&gt; Warning: replacing previous import by 'smoof::getParamSet' when loading
-#&gt; 'mlrMBO'
-#&gt; 
 #&gt; Attaching package: 'mlrMBO'
 #&gt; The following object is masked from 'package:ParamHelpers':
 #&gt; 
@@ -219,10 +212,10 @@ control = setMBOControlInfill(control, crit = &quot;ei&quot;, opt = &quot;ea&quo
 
 result = mbo(obj.fun, learner = learner, control = control, show.info = TRUE)
 #&gt; Computing y column(s) for design. Not provided.
-#&gt; [mbo] 0: x=3.29 : y = 23.5 : 0.0 secs : initdesign
-#&gt; [mbo] 0: x=-3.22 : y = 18.5 : 0.0 secs : initdesign
-#&gt; [mbo] 0: x=-0.777 : y = 8.9 : 0.0 secs : initdesign
-#&gt; [mbo] 0: x=1.93 : y = 4.59 : 0.0 secs : initdesign
+#&gt; [mbo] 0: x=-3.19 : y = 16.3 : 0.0 secs : initdesign
+#&gt; [mbo] 0: x=1.42 : y = 20.7 : 0.0 secs : initdesign
+#&gt; [mbo] 0: x=4.33 : y = 33.6 : 0.0 secs : initdesign
+#&gt; [mbo] 0: x=-2.23 : y = 13.5 : 0.0 secs : initdesign
 #&gt; 
 #&gt; optimisation start
 #&gt; ------------------
@@ -234,24 +227,27 @@ result = mbo(obj.fun, learner = learner, control = control, show.info = TRUE)
 #&gt;   - type :  matern3_2 
 #&gt;   - nugget : NO
 #&gt;   - parameters lower bounds :  1e-10 
-#&gt;   - parameters upper bounds :  13.02456 
-#&gt;   - best initial criterion value(s) :  -14.00775 
+#&gt;   - parameters upper bounds :  15.0348 
+#&gt;   - best initial criterion value(s) :  -13.01221 
 #&gt; 
 #&gt; N = 1, M = 5 machine precision = 2.22045e-16
 #&gt; At X0, 0 variables are exactly at the bounds
-#&gt; At iterate     0  f=       14.008  |proj g|=      0.72708
-#&gt; At iterate     1  f =       13.729  |proj g|=             0
+#&gt; At iterate     0  f=       13.012  |proj g|=     0.013128
+#&gt; At iterate     1  f =       13.012  |proj g|=      0.011867
+#&gt; At iterate     2  f =       13.011  |proj g|=    0.00039665
+#&gt; At iterate     3  f =       13.011  |proj g|=    1.2665e-05
+#&gt; At iterate     4  f =       13.011  |proj g|=     1.425e-08
 #&gt; 
-#&gt; iterations 1
-#&gt; function evaluations 2
-#&gt; segments explored during Cauchy searches 1
+#&gt; iterations 4
+#&gt; function evaluations 5
+#&gt; segments explored during Cauchy searches 4
 #&gt; BFGS updates skipped 0
-#&gt; active bounds at final generalized Cauchy point 1
-#&gt; norm of the final projected gradient 0
-#&gt; final function value 13.7295
+#&gt; active bounds at final generalized Cauchy point 0
+#&gt; norm of the final projected gradient 1.42499e-08
+#&gt; final function value 13.0113
 #&gt; 
-#&gt; F = 13.7295
-#&gt; final  value 13.729484 
+#&gt; F = 13.0113
+#&gt; final  value 13.011297 
 #&gt; converged
 #&gt; Loading required package: emoa
 #&gt; 
@@ -259,7 +255,7 @@ result = mbo(obj.fun, learner = learner, control = control, show.info = TRUE)
 #&gt; The following object is masked from 'package:BBmisc':
 #&gt; 
 #&gt;     coalesce
-#&gt; [mbo] 1: x=3.5 : y = 32.2 : 0.0 secs : infill_ei
+#&gt; [mbo] 1: x=-1.12 : y = 4.1 : 0.0 secs : infill_ei
 #&gt; 
 #&gt; optimisation start
 #&gt; ------------------
@@ -271,28 +267,28 @@ result = mbo(obj.fun, learner = learner, control = control, show.info = TRUE)
 #&gt;   - type :  matern3_2 
 #&gt;   - nugget : NO
 #&gt;   - parameters lower bounds :  1e-10 
-#&gt;   - parameters upper bounds :  13.4358 
-#&gt;   - best initial criterion value(s) :  -18.15923 
+#&gt;   - parameters upper bounds :  15.0348 
+#&gt;   - best initial criterion value(s) :  -17.81054 
 #&gt; 
 #&gt; N = 1, M = 5 machine precision = 2.22045e-16
 #&gt; At X0, 0 variables are exactly at the bounds
-#&gt; At iterate     0  f=       18.159  |proj g|=      0.24804
-#&gt; At iterate     1  f =       18.157  |proj g|=      0.019406
-#&gt; At iterate     2  f =       18.157  |proj g|=     0.0010016
-#&gt; At iterate     3  f =       18.157  |proj g|=    4.3897e-06
+#&gt; At iterate     0  f=       17.811  |proj g|=    0.0026644
+#&gt; At iterate     1  f =       17.811  |proj g|=     0.0010327
+#&gt; At iterate     2  f =       17.811  |proj g|=    1.1827e-06
+#&gt; At iterate     3  f =       17.811  |proj g|=     5.225e-10
 #&gt; 
 #&gt; iterations 3
-#&gt; function evaluations 5
+#&gt; function evaluations 4
 #&gt; segments explored during Cauchy searches 3
 #&gt; BFGS updates skipped 0
 #&gt; active bounds at final generalized Cauchy point 0
-#&gt; norm of the final projected gradient 4.3897e-06
-#&gt; final function value 18.157
+#&gt; norm of the final projected gradient 5.22497e-10
+#&gt; final function value 17.8105
 #&gt; 
-#&gt; F = 18.157
-#&gt; final  value 18.156974 
+#&gt; F = 17.8105
+#&gt; final  value 17.810531 
 #&gt; converged
-#&gt; [mbo] 2: x=1.76 : y = 12.7 : 0.0 secs : infill_ei
+#&gt; [mbo] 2: x=-0.607 : y = 18.2 : 0.0 secs : infill_ei
 #&gt; 
 #&gt; optimisation start
 #&gt; ------------------
@@ -304,49 +300,13 @@ result = mbo(obj.fun, learner = learner, control = control, show.info = TRUE)
 #&gt;   - type :  matern3_2 
 #&gt;   - nugget : NO
 #&gt;   - parameters lower bounds :  1e-10 
-#&gt;   - parameters upper bounds :  13.4358 
-#&gt;   - best initial criterion value(s) :  -21.29922 
+#&gt;   - parameters upper bounds :  15.0348 
+#&gt;   - best initial criterion value(s) :  -23.01335 
 #&gt; 
 #&gt; N = 1, M = 5 machine precision = 2.22045e-16
 #&gt; At X0, 0 variables are exactly at the bounds
-#&gt; At iterate     0  f=       21.299  |proj g|=      0.33594
-#&gt; At iterate     1  f =       21.239  |proj g|=        0.2966
-#&gt; At iterate     2  f =       21.215  |proj g|=       0.76838
-#&gt; At iterate     3  f =       21.206  |proj g|=       0.14353
-#&gt; At iterate     4  f =       21.206  |proj g|=      0.013429
-#&gt; At iterate     5  f =       21.206  |proj g|=    0.00027265
-#&gt; At iterate     6  f =       21.206  |proj g|=    5.0258e-07
-#&gt; 
-#&gt; iterations 6
-#&gt; function evaluations 8
-#&gt; segments explored during Cauchy searches 6
-#&gt; BFGS updates skipped 0
-#&gt; active bounds at final generalized Cauchy point 0
-#&gt; norm of the final projected gradient 5.02585e-07
-#&gt; final function value 21.2059
-#&gt; 
-#&gt; F = 21.2059
-#&gt; final  value 21.205949 
-#&gt; converged
-#&gt; [mbo] 3: x=2.06 : y = 4.87 : 0.0 secs : infill_ei
-#&gt; 
-#&gt; optimisation start
-#&gt; ------------------
-#&gt; * estimation method   : MLE 
-#&gt; * optimisation method : BFGS 
-#&gt; * analytical gradient : used
-#&gt; * trend model : ~1
-#&gt; * covariance model : 
-#&gt;   - type :  matern3_2 
-#&gt;   - nugget : NO
-#&gt;   - parameters lower bounds :  1e-10 
-#&gt;   - parameters upper bounds :  13.4358 
-#&gt;   - best initial criterion value(s) :  -28.29369 
-#&gt; 
-#&gt; N = 1, M = 5 machine precision = 2.22045e-16
-#&gt; At X0, 0 variables are exactly at the bounds
-#&gt; At iterate     0  f=       28.294  |proj g|=       1.6315
-#&gt; At iterate     1  f =       25.707  |proj g|=             0
+#&gt; At iterate     0  f=       23.013  |proj g|=        1.416
+#&gt; At iterate     1  f =       21.584  |proj g|=             0
 #&gt; 
 #&gt; iterations 1
 #&gt; function evaluations 2
@@ -354,12 +314,12 @@ result = mbo(obj.fun, learner = learner, control = control, show.info = TRUE)
 #&gt; BFGS updates skipped 0
 #&gt; active bounds at final generalized Cauchy point 1
 #&gt; norm of the final projected gradient 0
-#&gt; final function value 25.7075
+#&gt; final function value 21.5838
 #&gt; 
-#&gt; F = 25.7075
-#&gt; final  value 25.707464 
+#&gt; F = 21.5838
+#&gt; final  value 21.583813 
 #&gt; converged
-#&gt; [mbo] 4: x=1.49 : y = 22.2 : 0.0 secs : infill_ei
+#&gt; [mbo] 3: x=0.462 : y = 19.9 : 0.0 secs : infill_ei
 #&gt; 
 #&gt; optimisation start
 #&gt; ------------------
@@ -371,28 +331,30 @@ result = mbo(obj.fun, learner = learner, control = control, show.info = TRUE)
 #&gt;   - type :  matern3_2 
 #&gt;   - nugget : NO
 #&gt;   - parameters lower bounds :  1e-10 
-#&gt;   - parameters upper bounds :  13.4358 
-#&gt;   - best initial criterion value(s) :  -26.77505 
+#&gt;   - parameters upper bounds :  15.0348 
+#&gt;   - best initial criterion value(s) :  -24.69665 
 #&gt; 
 #&gt; N = 1, M = 5 machine precision = 2.22045e-16
 #&gt; At X0, 0 variables are exactly at the bounds
-#&gt; At iterate     0  f=       26.775  |proj g|=      0.24803
-#&gt; At iterate     1  f =       26.774  |proj g|=      0.020612
-#&gt; At iterate     2  f =       26.774  |proj g|=    0.00051553
-#&gt; At iterate     3  f =       26.774  |proj g|=      1.11e-06
+#&gt; At iterate     0  f=       24.697  |proj g|=      0.24833
+#&gt; At iterate     1  f =       24.672  |proj g|=    0.00010665
+#&gt; At iterate     2  f =       24.672  |proj g|=    7.3326e-05
+#&gt; At iterate     3  f =       24.672  |proj g|=    2.8665e-05
+#&gt; At iterate     4  f =       24.672  |proj g|=    1.4202e-05
+#&gt; At iterate     5  f =       24.672  |proj g|=    6.4961e-06
 #&gt; 
-#&gt; iterations 3
-#&gt; function evaluations 5
-#&gt; segments explored during Cauchy searches 3
+#&gt; iterations 5
+#&gt; function evaluations 8
+#&gt; segments explored during Cauchy searches 5
 #&gt; BFGS updates skipped 0
 #&gt; active bounds at final generalized Cauchy point 0
-#&gt; norm of the final projected gradient 1.10996e-06
-#&gt; final function value 26.7739
+#&gt; norm of the final projected gradient 6.49607e-06
+#&gt; final function value 24.6721
 #&gt; 
-#&gt; F = 26.7739
-#&gt; final  value 26.773908 
+#&gt; F = 24.6721
+#&gt; final  value 24.672112 
 #&gt; converged
-#&gt; [mbo] 5: x=-1.13 : y = 4.61 : 0.0 secs : infill_ei
+#&gt; [mbo] 4: x=-1.1 : y = 3.13 : 0.0 secs : infill_ei
 #&gt; 
 #&gt; optimisation start
 #&gt; ------------------
@@ -404,29 +366,66 @@ result = mbo(obj.fun, learner = learner, control = control, show.info = TRUE)
 #&gt;   - type :  matern3_2 
 #&gt;   - nugget : NO
 #&gt;   - parameters lower bounds :  1e-10 
-#&gt;   - parameters upper bounds :  13.4358 
-#&gt;   - best initial criterion value(s) :  -30.8632 
+#&gt;   - parameters upper bounds :  15.0348 
+#&gt;   - best initial criterion value(s) :  -36.06878 
 #&gt; 
 #&gt; N = 1, M = 5 machine precision = 2.22045e-16
 #&gt; At X0, 0 variables are exactly at the bounds
-#&gt; At iterate     0  f=       30.863  |proj g|=       7.3933
-#&gt; At iterate     1  f =       30.725  |proj g|=       0.64711
-#&gt; At iterate     2  f =       30.376  |proj g|=       0.51843
-#&gt; At iterate     3  f =       30.264  |proj g|=       0.11344
-#&gt; At iterate     4  f =       30.264  |proj g|=      0.034592
-#&gt; At iterate     5  f =       30.264  |proj g|=     0.0004087
-#&gt; At iterate     6  f =       30.264  |proj g|=    1.4475e-06
+#&gt; At iterate     0  f=       36.069  |proj g|=       1.9735
+#&gt; At iterate     1  f =       28.071  |proj g|=       0.66706
+#&gt; ys=-9.688e+00  -gs= 3.895e+00, BFGS update SKIPPED
+#&gt; At iterate     2  f =       27.058  |proj g|=       0.51091
+#&gt; At iterate     3  f =       26.674  |proj g|=       0.43806
+#&gt; Nonpositive definiteness in Cholesky factorization in formk;
+#&gt;    refresh the lbfgs memory and restart the iteration.
+#&gt; At iterate     4  f =       26.492  |proj g|=        0.3943
+#&gt; At iterate     5  f =       26.277  |proj g|=        1.4558
+#&gt; At iterate     6  f =       26.247  |proj g|=       0.19778
+#&gt; At iterate     7  f =       26.247  |proj g|=     0.0077588
+#&gt; At iterate     8  f =       26.247  |proj g|=    4.2594e-05
+#&gt; At iterate     9  f =       26.247  |proj g|=    9.0802e-09
 #&gt; 
-#&gt; iterations 6
-#&gt; function evaluations 10
-#&gt; segments explored during Cauchy searches 6
-#&gt; BFGS updates skipped 0
+#&gt; iterations 9
+#&gt; function evaluations 13
+#&gt; segments explored during Cauchy searches 10
+#&gt; BFGS updates skipped 1
 #&gt; active bounds at final generalized Cauchy point 0
-#&gt; norm of the final projected gradient 1.44747e-06
-#&gt; final function value 30.2635
+#&gt; norm of the final projected gradient 9.08018e-09
+#&gt; final function value 26.2465
 #&gt; 
-#&gt; F = 30.2635
-#&gt; final  value 30.263536 
+#&gt; F = 26.2465
+#&gt; final  value 26.246511 
+#&gt; converged
+#&gt; [mbo] 5: x=-1.02 : y = 1.08 : 0.0 secs : infill_ei
+#&gt; 
+#&gt; optimisation start
+#&gt; ------------------
+#&gt; * estimation method   : MLE 
+#&gt; * optimisation method : BFGS 
+#&gt; * analytical gradient : used
+#&gt; * trend model : ~1
+#&gt; * covariance model : 
+#&gt;   - type :  matern3_2 
+#&gt;   - nugget : NO
+#&gt;   - parameters lower bounds :  1e-10 
+#&gt;   - parameters upper bounds :  15.0348 
+#&gt;   - best initial criterion value(s) :  -34.50177 
+#&gt; 
+#&gt; N = 1, M = 5 machine precision = 2.22045e-16
+#&gt; At X0, 0 variables are exactly at the bounds
+#&gt; At iterate     0  f=       34.502  |proj g|=       1.6909
+#&gt; At iterate     1  f =       33.339  |proj g|=             0
+#&gt; 
+#&gt; iterations 1
+#&gt; function evaluations 2
+#&gt; segments explored during Cauchy searches 1
+#&gt; BFGS updates skipped 0
+#&gt; active bounds at final generalized Cauchy point 1
+#&gt; norm of the final projected gradient 0
+#&gt; final function value 33.3391
+#&gt; 
+#&gt; F = 33.3391
+#&gt; final  value 33.339110 
 #&gt; converged
 </code></pre>
 
@@ -491,13 +490,13 @@ objfun2(list(j = 0.5, k = 1L, method = &quot;a&quot;))
 <p>An easy (and recommended) way to create an initial design is to use the <code>generateDesign</code> function from the <strong>ParamHelpers</strong> package. If the default settings are used (i.e. <code>design = NULL</code>) a Random Latin Hypercube <code>lhs::randomLHS</code> design is used with 4 times the number of parameters the objective function has. Other possibilities to generate designs are for example <code>generateGridDesign</code> and <code>generateRandomDesign</code>. </p>
 <p><em>Note:</em> If special designs are desired (e.g., orthogonal designs), its interface has to be the same as the interface of the <code>generateDesign</code> objects. </p>
 <p>For <code>objfun1</code> and <code>objfun2</code> we create a slightly larger number of initial points than the default suggests. For <code>objfun1</code> we use Random Latin Hypercube sampling and for <code>objfun2</code> the Maximin Latin Hypercube sampling. The parameters of the sampling design have to be specified in a list and supplied via <code>fun.args</code>.</p>
-<pre><code class="r">init.points1 = 5 * sum(ParamHelpers::getParamLengths(smoof::getParamSet(objfun1)))
+<pre><code class="r">init.points1 = 5 * sum(ParamHelpers::getParamLengths(getParamSet(objfun1)))
 
 set.seed(1)
-design1 = generateDesign(n = init.points1, par.set = smoof::getParamSet(objfun1), fun = randomLHS, trafo = FALSE)
+design1 = generateDesign(n = init.points1, par.set = getParamSet(objfun1), fun = randomLHS, trafo = FALSE)
 
-init.points2 = 5 * sum(ParamHelpers::getParamLengths(smoof::getParamSet(objfun2)))
-design2 = generateDesign(n = init.points2, par.set = smoof::getParamSet(objfun2), fun.args = list(k = 3, dup = 4), fun = maximinLHS, trafo = FALSE)
+init.points2 = 5 * sum(ParamHelpers::getParamLengths(getParamSet(objfun2)))
+design2 = generateDesign(n = init.points2, par.set = getParamSet(objfun2), fun.args = list(k = 3, dup = 4), fun = maximinLHS, trafo = FALSE)
 </code></pre>
 
 <h1 id="surrogate-model">Surrogate Model</h1>
@@ -612,28 +611,28 @@ control2 = setMBOControlTermination(
 #&gt; 33  20.40116345 -11.35839  0.1671055  8.996293  0.07495621 19.37707   8
 #&gt; 34  -0.09598261 -11.03762 -0.2741146  9.177053 -0.53188528 15.93757   9
 #&gt; 35   1.02545547 -11.14438 -2.1749602  8.793208 -0.20463488 15.51709  10
-#&gt;    eol error.message exec.time          ei error.model train.time
-#&gt; 26  NA          &lt;NA&gt;     0.000 -0.13572183        &lt;NA&gt;      0.044
-#&gt; 27  NA          &lt;NA&gt;     0.001 -0.04343611        &lt;NA&gt;      0.050
-#&gt; 28  NA          &lt;NA&gt;     0.000 -0.06930553        &lt;NA&gt;      0.066
-#&gt; 29  NA          &lt;NA&gt;     0.000 -0.07111303        &lt;NA&gt;      0.089
-#&gt; 30  NA          &lt;NA&gt;     0.000 -0.04882831        &lt;NA&gt;      0.062
-#&gt; 31  NA          &lt;NA&gt;     0.000 -0.05262250        &lt;NA&gt;      0.057
-#&gt; 32  NA          &lt;NA&gt;     0.000 -0.04465761        &lt;NA&gt;      0.064
-#&gt; 33  NA          &lt;NA&gt;     0.000 -0.07328187        &lt;NA&gt;      0.117
-#&gt; 34  NA          &lt;NA&gt;     0.000 -0.15297708        &lt;NA&gt;      0.042
-#&gt; 35  NA          &lt;NA&gt;     0.000 -0.09966843        &lt;NA&gt;      0.131
-#&gt;    prop.type propose.time exec.timestamp        se     mean
-#&gt; 26 infill_ei        1.277     1464952490 0.1701271 19.75186
-#&gt; 27 infill_ei        1.301     1464952492 0.2315570 17.37290
-#&gt; 28 infill_ei        1.194     1464952493 0.2334914 17.30166
-#&gt; 29 infill_ei        1.427     1464952495 0.1798618 16.78846
-#&gt; 30 infill_ei        1.500     1464952497 0.2711088 16.93882
-#&gt; 31 infill_ei        1.433     1464952499 0.3026688 16.96312
-#&gt; 32 infill_ei        1.389     1464952500 0.2836455 16.96928
-#&gt; 33 infill_ei        1.363     1464952502 0.3412791 16.93965
-#&gt; 34 infill_ei        1.440     1464952504 0.1966018 16.66667
-#&gt; 35 infill_ei        1.428     1464952506 0.1522894 15.87113
+#&gt;    eol error.message exec.time          ei error.model constant.model
+#&gt; 26  NA          &lt;NA&gt;     0.000 -0.13572183        &lt;NA&gt;          FALSE
+#&gt; 27  NA          &lt;NA&gt;     0.000 -0.04343611        &lt;NA&gt;          FALSE
+#&gt; 28  NA          &lt;NA&gt;     0.000 -0.06930553        &lt;NA&gt;          FALSE
+#&gt; 29  NA          &lt;NA&gt;     0.000 -0.07111303        &lt;NA&gt;          FALSE
+#&gt; 30  NA          &lt;NA&gt;     0.000 -0.04882831        &lt;NA&gt;          FALSE
+#&gt; 31  NA          &lt;NA&gt;     0.001 -0.05262250        &lt;NA&gt;          FALSE
+#&gt; 32  NA          &lt;NA&gt;     0.000 -0.04465761        &lt;NA&gt;          FALSE
+#&gt; 33  NA          &lt;NA&gt;     0.000 -0.07328187        &lt;NA&gt;          FALSE
+#&gt; 34  NA          &lt;NA&gt;     0.000 -0.15297708        &lt;NA&gt;          FALSE
+#&gt; 35  NA          &lt;NA&gt;     0.000 -0.09966843        &lt;NA&gt;          FALSE
+#&gt;    train.time prop.type propose.time exec.timestamp        se     mean
+#&gt; 26      0.058 infill_ei        1.623     1476430465 0.1701271 19.75186
+#&gt; 27      0.044 infill_ei        1.209     1476430466 0.2315570 17.37290
+#&gt; 28      0.059 infill_ei        1.186     1476430468 0.2334914 17.30166
+#&gt; 29      0.084 infill_ei        1.212     1476430469 0.1798618 16.78846
+#&gt; 30      0.048 infill_ei        1.232     1476430471 0.2711088 16.93882
+#&gt; 31      0.050 infill_ei        1.241     1476430472 0.3026688 16.96312
+#&gt; 32      0.055 infill_ei        1.259     1476430474 0.2836455 16.96928
+#&gt; 33      0.102 infill_ei        1.397     1476430476 0.3412791 16.93965
+#&gt; 34      0.037 infill_ei        1.496     1476430477 0.1966018 16.66667
+#&gt; 35      0.116 infill_ei        1.432     1476430479 0.1522894 15.87113
 </code></pre>
 
 <p>The default output of mbo contains the best found parameter set and the optimzation path. The <code>MBOResult</code> object contains additional information, most importanty:</p>
@@ -668,28 +667,28 @@ mbo1 = mbo(objfun1, design = design1, learner = surr.km, control = control1, sho
 #&gt; 33  0.1582629  -7.663526 12.009755   4.105232  -3.323199 16.26470   8  NA
 #&gt; 34  0.1181351  -7.649562 11.368898 -11.688711  -2.412261 18.07821   9  NA
 #&gt; 35  0.5549428  -6.827755  6.507281   4.347422  -1.982138 14.14984  10  NA
-#&gt;    error.message exec.time       cb error.model train.time prop.type
-#&gt; 26          &lt;NA&gt;     0.001 19.65947        &lt;NA&gt;      0.045 infill_cb
-#&gt; 27          &lt;NA&gt;     0.000 18.90914        &lt;NA&gt;      0.057 infill_cb
-#&gt; 28          &lt;NA&gt;     0.000 18.92139        &lt;NA&gt;      0.047 infill_cb
-#&gt; 29          &lt;NA&gt;     0.000 18.93866        &lt;NA&gt;      0.079 infill_cb
-#&gt; 30          &lt;NA&gt;     0.000 18.82714        &lt;NA&gt;      0.040 infill_cb
-#&gt; 31          &lt;NA&gt;     0.000 18.48476        &lt;NA&gt;      0.065 infill_cb
-#&gt; 32          &lt;NA&gt;     0.001 18.50289        &lt;NA&gt;      0.078 infill_cb
-#&gt; 33          &lt;NA&gt;     0.000 18.42454        &lt;NA&gt;      0.058 infill_cb
-#&gt; 34          &lt;NA&gt;     0.001 16.11724        &lt;NA&gt;      0.064 infill_cb
-#&gt; 35          &lt;NA&gt;     0.000 16.10702        &lt;NA&gt;      0.102 infill_cb
-#&gt;    propose.time exec.timestamp        se     mean lambda
-#&gt; 26        1.425     1464952508 0.1837239 19.84319      1
-#&gt; 27        1.300     1464952509 0.1712301 19.08037      1
-#&gt; 28        1.332     1464952511 0.1575612 19.07895      1
-#&gt; 29        1.238     1464952513 0.1379985 19.07666      1
-#&gt; 30        1.344     1464952514 0.1967692 19.02391      1
-#&gt; 31        1.379     1464952516 0.1810977 18.66586      1
-#&gt; 32        1.378     1464952518 0.1946998 18.69759      1
-#&gt; 33        1.367     1464952520 0.2214879 18.64603      1
-#&gt; 34        1.388     1464952521 0.2650294 16.38227      1
-#&gt; 35        1.391     1464952523 0.2213947 16.32841      1
+#&gt;    error.message exec.time       cb error.model constant.model train.time
+#&gt; 26          &lt;NA&gt;     0.000 19.65947        &lt;NA&gt;          FALSE      0.043
+#&gt; 27          &lt;NA&gt;     0.000 18.90914        &lt;NA&gt;          FALSE      0.052
+#&gt; 28          &lt;NA&gt;     0.000 18.92139        &lt;NA&gt;          FALSE      0.038
+#&gt; 29          &lt;NA&gt;     0.000 18.93866        &lt;NA&gt;          FALSE      0.076
+#&gt; 30          &lt;NA&gt;     0.001 18.82714        &lt;NA&gt;          FALSE      0.039
+#&gt; 31          &lt;NA&gt;     0.000 18.48476        &lt;NA&gt;          FALSE      0.058
+#&gt; 32          &lt;NA&gt;     0.000 18.50289        &lt;NA&gt;          FALSE      0.079
+#&gt; 33          &lt;NA&gt;     0.000 18.42454        &lt;NA&gt;          FALSE      0.052
+#&gt; 34          &lt;NA&gt;     0.000 16.11724        &lt;NA&gt;          FALSE      0.058
+#&gt; 35          &lt;NA&gt;     0.000 16.10702        &lt;NA&gt;          FALSE      0.090
+#&gt;    prop.type propose.time exec.timestamp        se     mean lambda
+#&gt; 26 infill_cb        1.195     1476430481 0.1837239 19.84319      1
+#&gt; 27 infill_cb        1.231     1476430482 0.1712301 19.08037      1
+#&gt; 28 infill_cb        1.269     1476430484 0.1575612 19.07895      1
+#&gt; 29 infill_cb        1.248     1476430486 0.1379985 19.07666      1
+#&gt; 30 infill_cb        1.254     1476430487 0.1967692 19.02391      1
+#&gt; 31 infill_cb        1.322     1476430489 0.1810977 18.66586      1
+#&gt; 32 infill_cb        1.351     1476430490 0.1946998 18.69759      1
+#&gt; 33 infill_cb        1.336     1476430492 0.2214879 18.64603      1
+#&gt; 34 infill_cb        1.482     1476430494 0.2650294 16.38227      1
+#&gt; 35 infill_cb        1.564     1476430496 0.2213947 16.32841      1
 </code></pre>
 
 <h2 id="optimization-of-objfun2">Optimization of objfun2</h2>
@@ -708,26 +707,37 @@ If we would use <code>mean</code> as the infill criterion, any kind of model whi
 #&gt; 15 + 10 entries in total, displaying last 10 (or less):
 #&gt;            j k method        y dob eol error.message exec.time      mean
 #&gt; 16 0.4757427 2      b 2.235904   1  NA          &lt;NA&gt;     0.000 -2.026581
-#&gt; 17 0.4849609 2      b 2.235560   2  NA          &lt;NA&gt;     0.000 -2.082962
+#&gt; 17 0.4849609 2      b 2.235560   2  NA          &lt;NA&gt;     0.001 -2.082962
 #&gt; 18 0.4717123 2      b 2.235995   3  NA          &lt;NA&gt;     0.000 -2.119596
 #&gt; 19 0.4777613 2      b 2.235845   4  NA          &lt;NA&gt;     0.000 -2.138953
-#&gt; 20 0.4674350 2      b 2.236052   5  NA          &lt;NA&gt;     0.001 -2.152694
+#&gt; 20 0.4674350 2      b 2.236052   5  NA          &lt;NA&gt;     0.000 -2.152694
 #&gt; 21 0.4660672 2      b 2.236061   6  NA          &lt;NA&gt;     0.000 -2.161759
 #&gt; 22 0.4622545 2      b 2.236066   7  NA          &lt;NA&gt;     0.000 -2.172939
 #&gt; 23 0.4673248 2      b 2.236053   8  NA          &lt;NA&gt;     0.000 -2.174135
 #&gt; 24 0.4533910 2      b 2.235950   9  NA          &lt;NA&gt;     0.000 -2.175038
 #&gt; 25 0.4587362 2      b 2.236041  10  NA          &lt;NA&gt;     0.000 -2.187947
-#&gt;    error.model train.time   prop.type propose.time exec.timestamp
-#&gt; 16        &lt;NA&gt;      0.007 infill_mean        0.496     1464952524
-#&gt; 17        &lt;NA&gt;      0.006 infill_mean        0.507     1464952525
-#&gt; 18        &lt;NA&gt;      0.006 infill_mean        0.511     1464952525
-#&gt; 19        &lt;NA&gt;      0.006 infill_mean        0.520     1464952526
-#&gt; 20        &lt;NA&gt;      0.006 infill_mean        0.544     1464952527
-#&gt; 21        &lt;NA&gt;      0.007 infill_mean        0.547     1464952528
-#&gt; 22        &lt;NA&gt;      0.008 infill_mean        0.524     1464952529
-#&gt; 23        &lt;NA&gt;      0.007 infill_mean        0.566     1464952530
-#&gt; 24        &lt;NA&gt;      0.007 infill_mean        0.594     1464952531
-#&gt; 25        &lt;NA&gt;      0.007 infill_mean        0.622     1464952532
+#&gt;    error.model constant.model train.time   prop.type propose.time
+#&gt; 16        &lt;NA&gt;          FALSE      0.007 infill_mean        0.496
+#&gt; 17        &lt;NA&gt;          FALSE      0.006 infill_mean        0.504
+#&gt; 18        &lt;NA&gt;          FALSE      0.006 infill_mean        0.512
+#&gt; 19        &lt;NA&gt;          FALSE      0.006 infill_mean        0.513
+#&gt; 20        &lt;NA&gt;          FALSE      0.006 infill_mean        0.519
+#&gt; 21        &lt;NA&gt;          FALSE      0.006 infill_mean        0.525
+#&gt; 22        &lt;NA&gt;          FALSE      0.006 infill_mean        0.523
+#&gt; 23        &lt;NA&gt;          FALSE      0.006 infill_mean        0.515
+#&gt; 24        &lt;NA&gt;          FALSE      0.007 infill_mean        0.521
+#&gt; 25        &lt;NA&gt;          FALSE      0.006 infill_mean        0.530
+#&gt;    exec.timestamp
+#&gt; 16     1476430497
+#&gt; 17     1476430497
+#&gt; 18     1476430498
+#&gt; 19     1476430499
+#&gt; 20     1476430500
+#&gt; 21     1476430500
+#&gt; 22     1476430501
+#&gt; 23     1476430502
+#&gt; 24     1476430503
+#&gt; 25     1476430504
 </code></pre>
 
 <p>If we want to use the expected improvement <code>ei</code> or (lower) confidence bound <code>cb</code> infill criteria, the <code>predict.type</code> attribute of the learner has be set to <code>se</code>. A list of regression learners which support it can be viewed by:</p>
@@ -749,38 +759,38 @@ mbo2 = mbo(objfun2, design = design2, learner = learner_rf,
 #&gt; Optimization path
 #&gt; 15 + 10 entries in total, displaying last 10 (or less):
 #&gt;            j k method        y dob eol error.message exec.time
-#&gt; 16 0.4087665 2      b 2.232701   1  NA          &lt;NA&gt;     0.000
-#&gt; 17 0.4087998 2      b 2.232705   2  NA          &lt;NA&gt;     0.000
-#&gt; 18 0.4033413 2      b 2.232003   3  NA          &lt;NA&gt;     0.001
-#&gt; 19 0.3865188 2      b 2.229420   4  NA          &lt;NA&gt;     0.000
-#&gt; 20 0.3744102 2      b 2.227171   5  NA          &lt;NA&gt;     0.000
-#&gt; 21 0.3983756 2      b 2.231306   6  NA          &lt;NA&gt;     0.000
-#&gt; 22 0.3475329 2      b 2.221011   7  NA          &lt;NA&gt;     0.000
-#&gt; 23 0.3283410 2      b 2.215630   8  NA          &lt;NA&gt;     0.000
-#&gt; 24 0.3200959 2      b 2.213068   9  NA          &lt;NA&gt;     0.000
-#&gt; 25 0.3247575 2      b 2.214535  10  NA          &lt;NA&gt;     0.000
-#&gt;              ei error.model train.time prop.type propose.time
-#&gt; 16 -0.001032499        &lt;NA&gt;      0.177 infill_ei       33.625
-#&gt; 17 -0.003238726        &lt;NA&gt;      0.168 infill_ei       31.749
-#&gt; 18 -0.002051443        &lt;NA&gt;      0.201 infill_ei       31.214
-#&gt; 19 -0.002915200        &lt;NA&gt;      0.183 infill_ei       31.944
-#&gt; 20 -0.002450279        &lt;NA&gt;      0.173 infill_ei       31.415
-#&gt; 21 -0.002619635        &lt;NA&gt;      0.175 infill_ei       31.749
-#&gt; 22 -0.004576781        &lt;NA&gt;      0.178 infill_ei       32.058
-#&gt; 23 -0.005052992        &lt;NA&gt;      0.180 infill_ei       31.290
-#&gt; 24 -0.003741054        &lt;NA&gt;      0.180 infill_ei       31.704
-#&gt; 25 -0.004406909        &lt;NA&gt;      0.194 infill_ei       32.131
-#&gt;    exec.timestamp         se     mean
-#&gt; 16     1464952566 0.14104875 1.944803
-#&gt; 17     1464952599 0.14306666 2.004142
-#&gt; 18     1464952630 0.10511671 2.058761
-#&gt; 19     1464952663 0.13876233 2.006720
-#&gt; 20     1464952695 0.09833344 2.080229
-#&gt; 21     1464952727 0.08121638 2.116259
-#&gt; 22     1464952760 0.10829462 2.090093
-#&gt; 23     1464952792 0.12091591 2.072615
-#&gt; 24     1464952824 0.10710490 2.082343
-#&gt; 25     1464952857 0.08455944 2.130153
+#&gt; 16 0.4087665 2      b 2.232701   1  NA          &lt;NA&gt;         0
+#&gt; 17 0.4087998 2      b 2.232705   2  NA          &lt;NA&gt;         0
+#&gt; 18 0.4033413 2      b 2.232003   3  NA          &lt;NA&gt;         0
+#&gt; 19 0.3865188 2      b 2.229420   4  NA          &lt;NA&gt;         0
+#&gt; 20 0.3744102 2      b 2.227171   5  NA          &lt;NA&gt;         0
+#&gt; 21 0.3983756 2      b 2.231306   6  NA          &lt;NA&gt;         0
+#&gt; 22 0.3475329 2      b 2.221011   7  NA          &lt;NA&gt;         0
+#&gt; 23 0.3283410 2      b 2.215630   8  NA          &lt;NA&gt;         0
+#&gt; 24 0.3200959 2      b 2.213068   9  NA          &lt;NA&gt;         0
+#&gt; 25 0.3247575 2      b 2.214535  10  NA          &lt;NA&gt;         0
+#&gt;              ei error.model constant.model train.time prop.type
+#&gt; 16 -0.001032499        &lt;NA&gt;          FALSE      0.179 infill_ei
+#&gt; 17 -0.003238726        &lt;NA&gt;          FALSE      0.181 infill_ei
+#&gt; 18 -0.002051443        &lt;NA&gt;          FALSE      0.239 infill_ei
+#&gt; 19 -0.002915200        &lt;NA&gt;          FALSE      0.220 infill_ei
+#&gt; 20 -0.002450279        &lt;NA&gt;          FALSE      0.169 infill_ei
+#&gt; 21 -0.002619635        &lt;NA&gt;          FALSE      0.179 infill_ei
+#&gt; 22 -0.004576781        &lt;NA&gt;          FALSE      0.174 infill_ei
+#&gt; 23 -0.005052992        &lt;NA&gt;          FALSE      0.170 infill_ei
+#&gt; 24 -0.003741054        &lt;NA&gt;          FALSE      0.170 infill_ei
+#&gt; 25 -0.004406909        &lt;NA&gt;          FALSE      0.175 infill_ei
+#&gt;    propose.time exec.timestamp         se     mean
+#&gt; 16       24.614     1476430529 0.14104875 1.944803
+#&gt; 17       22.814     1476430552 0.14306666 2.004142
+#&gt; 18       23.257     1476430576 0.10511671 2.058761
+#&gt; 19       22.353     1476430600 0.13876233 2.006720
+#&gt; 20       22.548     1476430623 0.09833344 2.080229
+#&gt; 21       22.396     1476430646 0.08121638 2.116259
+#&gt; 22       21.545     1476430668 0.10829462 2.090093
+#&gt; 23       22.122     1476430691 0.12091591 2.072615
+#&gt; 24       21.976     1476430713 0.10710490 2.082343
+#&gt; 25       22.419     1476430736 0.08455944 2.130153
 </code></pre>
 
 <p>Finally, if a learner, which does not support the <code>se</code> prediction type, should be applied for the optimization with the <code>ei</code> infill criterion, it is  possible to create a bagging model with the desired characteristics. For details on how to do it take a look at the <a href="https://mlr-org.github.io/mlr-tutorial/devel/html/bagging/index.html">bagging section</a> in the <code>mlr</code> tutorial.</p></div>

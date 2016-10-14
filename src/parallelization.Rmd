@@ -13,7 +13,7 @@ obj.fun = makeSphereFunction(1)
 learner = makeLearner("regr.km", predict.type = "se", covtype = "matern3_2")
 control = makeMBOControl()
 control = setMBOControlTermination(control, iters = 3)
-design = generateDesign(n = 6, par.set = smoof::getParamSet(obj.fun))
+design = generateDesign(n = 6, par.set = getParamSet(obj.fun))
 
 parallelStartMulticore(cpus = 2) # use 2 CPUs
 res = mbo(obj.fun, learner = learner, control = control)
@@ -57,7 +57,7 @@ obj.fun = makeSingleObjectiveFunction(name = "noisy_example",
 control = makeMBOControl()
 control = setMBOControlTermination(control, iters = 10L)
 
-design = generateDesign(n = 10, smoof::getParamSet(obj.fun), trafo = TRUE)
+design = generateDesign(n = 10, getParamSet(obj.fun), trafo = TRUE)
 
 parallelStartMulticore(cous = 4L)
 exampleRun(obj.fun, design = design, control = control)

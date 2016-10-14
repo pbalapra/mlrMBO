@@ -22,7 +22,7 @@ In this simple example, we use the zdt1 function and to simplify, we use only tw
 #################################################################################
 # define the multi-objective function to be optimized and get the parameter set 
 obj = makeZDT1Function(2L) # obj will be a S3 class that inherits from "function" and "smoof_function", the type of obj itself will be "smoof_multi_objective_function" "smoof_function" 
-par.set = smoof::getParamSet(obj)
+par.set = getParamSet(obj)
 
 # have a look the lower and upper bound for the parameter to be tuned
 par.set$pars$x$lower 
@@ -35,8 +35,8 @@ Like other model based optimization problem, one need to define an initial desig
 ```{r}
 #################################################################################
 # generate initial design points on the grid
-init.points.num = 5 * sum(ParamHelpers::getParamLengths(smoof::getParamSet(obj))) # 5 times the total dimension 
-design1 = generateDesign(n = init.points.num, par.set = smoof::getParamSet(obj), fun=maximinLHS, fun.args = list(k=2))
+init.points.num = 5 * sum(ParamHelpers::getParamLengths(getParamSet(obj))) # 5 times the total dimension 
+design1 = generateDesign(n = init.points.num, par.set = getParamSet(obj), fun=maximinLHS, fun.args = list(k=2))
 ```
 
 The next step is the most critical step, which is different from other Model Based Optimization technique. As other MBO methods, we have to first define a surrogate model, which we use Kriging Model ("regr.km") here. Then we define the control object, which could be parallelized. Here we parallely propose 4L points each time.

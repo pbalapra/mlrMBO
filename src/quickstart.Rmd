@@ -24,7 +24,7 @@ learner = makeLearner("regr.km", predict.type = "se", covtype = "matern3_2")
 control = makeMBOControl()
 control = setMBOControlTermination(control, iters = 10)
 control = setMBOControlInfill(control, crit = "ei")
-design = generateDesign(n = 10, par.set = smoof::getParamSet(obj.fun))
+design = generateDesign(n = 10, par.set = getParamSet(obj.fun))
 ```
 
 Finally we start the optimization process and print the result object.
@@ -51,7 +51,7 @@ Or alternatively for a two dimensional function:
 
 ```{r, results="hide"}
 obj.fun2 = makeRastriginFunction(2L)
-design2 = generateDesign(n = 10, par.set = smoof::getParamSet(obj.fun2))
+design2 = generateDesign(n = 10, par.set = getParamSet(obj.fun2))
 ex2 = exampleRun(obj.fun2, control = control, show.info = FALSE)
 ```
 ```{r}
