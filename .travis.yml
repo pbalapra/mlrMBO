@@ -39,7 +39,7 @@ script:
   - ./build
 
 after_success:
-  - .utility/push-tutorial-to-gh-pages.sh
+  - bash .utility/push-tutorial-to-gh-pages.sh
 
 notifications:
   email:
