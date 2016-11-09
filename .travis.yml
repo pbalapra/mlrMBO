@@ -24,6 +24,24 @@ addons:
       - libgsl0-dev
       - pandoc
 
+r_packages:
+  - glmnet
+  - ROCR
+  - methods
+  - pander
+  - knitr
+  - stringr
+  - digest
+  - caret
+  - rgl
+
+r_github_packages:
+  - berndbischl/BBmisc
+  - berndbischl/parallelMap
+  - berndbischl/ParamHelpers
+  - mlr-org/mlr
+  - mlr-org/mlrMBO
+
 before_install:
   - mkdir $HOME/bin
   - ln -s $(which gcc-4.9) $HOME/bin/gcc
