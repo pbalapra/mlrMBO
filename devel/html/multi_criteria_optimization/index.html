@@ -8,23 +8,22 @@
         
         
         <link rel="shortcut icon" href="../img/favicon.ico">
-
-	<title>Multi-criteria optimization - mlrMBO tutorial</title>
-
+        <title>Multi-criteria optimization - mlrMBO tutorial</title>
         <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
         <link href="../css/font-awesome-4.5.0.css" rel="stylesheet">
         <link href="../css/base.css" rel="stylesheet">
         <link rel="stylesheet" href="../css/highlight.css">
         <link href="../css/custom_mlr.css" rel="stylesheet">
         <link href="../css/custom_highlight.css" rel="stylesheet">
-
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
             <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
             <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
         <![endif]-->
-
-        
+	
+	<script src="../js/jquery-1.10.2.min.js"></script>
+        <script src="../js/bootstrap-3.0.3.min.js"></script>
+        <script src="../js/highlight.pack.js"></script> 
     </head>
 
     <body>
@@ -34,7 +33,6 @@
 
         <!-- Collapsed navigation -->
         <div class="navbar-header">
-            
             <!-- Expander button -->
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                 <span class="sr-only">Toggle navigation</span>
@@ -42,74 +40,47 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            
-
-            <!-- Main title -->
             <a class="navbar-brand" href="../index.html">mlrMBO tutorial</a>
         </div>
 
         <!-- Expanded navigation -->
         <div class="navbar-collapse collapse">
-            
                 <!-- Main navigation -->
                 <ul class="nav navbar-nav">
-                
-                
                     <li >
                         <a href="../index.html">Home</a>
                     </li>
-                
-                
-                
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Basics <b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                        
                             
 <li >
     <a href="../quickstart/index.html">Quickstart</a>
 </li>
-
-                        
                             
 <li >
     <a href="../in_depth_introduction/index.html">In Depth Introduction</a>
 </li>
-
-                        
                         </ul>
                     </li>
-                
-                
-                
                     <li class="dropdown active">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Advanced <b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                        
                             
 <li >
     <a href="../parallelization/index.html">Parallelization</a>
 </li>
-
-                        
                             
 <li >
     <a href="../multi_point_proposal/index.html">Multi point proposal</a>
 </li>
-
-                        
                             
 <li class="active">
     <a href="index.html">Multi-criteria optimization</a>
 </li>
-
-                        
                         </ul>
                     </li>
-                
-                
                 </ul>
-            
 
             <ul class="nav navbar-nav navbar-right">
                 <li>
@@ -117,7 +88,6 @@
                         <i class="fa fa-search"></i> Search
                     </a>
                 </li>
-                
                     <li >
                         <a rel="next" href="../multi_point_proposal/index.html">
                             <i class="fa fa-arrow-left"></i> Previous
@@ -128,33 +98,21 @@
                             Next <i class="fa fa-arrow-right"></i>
                         </a>
                     </li>
-                
-                
                     <li>
                         <a href="https://github.com/mlr-org/mlrMBO/">
-                            
-                                <i class="fa fa-github"></i>
-                            
-                            GitHub
+                                <i class="fa fa-github"></i>GitHub
                         </a>
                     </li>
-                
             </ul>
         </div>
     </div>
 </div>
 
         <div class="container">
-            
                 <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
-    
         <li class="main active"><a href="#introduction">Introduction</a></li>
-        
-    
         <li class="main "><a href="#a-working-example">A working example</a></li>
-        
-    
     </ul>
 </div></div>
                 <div class="col-md-9" role="main">
@@ -216,108 +174,123 @@ print(names(res))
 # print out the pareto front 
 print(res$pareto.front) 
 #&gt;           y_1         y_2
-#&gt; 11 0.99683561 0.002693454
-#&gt; 12 0.28749301 0.466422148
-#&gt; 13 0.68275299 0.176425702
-#&gt; 14 0.01862481 0.865935267
-#&gt; 15 0.49153716 0.300156355
-#&gt; 16 0.11132573 0.671276923
-#&gt; 17 0.86227468 0.075031240
-#&gt; 18 0.18259950 0.575551612
-#&gt; 19 0.39534151 0.373062304
-#&gt; 20 0.60137988 0.225714924
-#&gt; 21 0.77955915 0.117629168
-#&gt; 22 0.23606723 0.523992893
+#&gt; 11 0.99800816 0.006716162
+#&gt; 12 0.28737455 0.467546794
+#&gt; 13 0.68113150 0.175956724
+#&gt; 14 0.02155166 0.856940919
+#&gt; 15 0.48558549 0.303763179
+#&gt; 16 0.12135996 0.651989629
+#&gt; 17 0.86682961 0.075313964
+#&gt; 18 0.38224958 0.381806915
+#&gt; 19 0.19636033 0.571558664
+#&gt; 20 0.59890454 0.227131461
+#&gt; 21 0.05259939 0.778773282
+#&gt; 22 0.78871649 0.112777953
 # print all evals along the optimization path
 print(as.data.frame(res$opt.path))
 #&gt;            x1           x2        y_1         y_2 dob eol error.message
-#&gt; 1  0.47506487 0.6482105619 0.47506487 5.032078350   0  NA          &lt;NA&gt;
-#&gt; 2  0.16018794 0.4921752617 0.16018794 4.496971964   0  NA          &lt;NA&gt;
-#&gt; 3  0.77277842 0.9875772405 0.77277842 7.123889856   0  NA          &lt;NA&gt;
-#&gt; 4  0.95226667 0.2541159349 0.95226667 1.517822718   0  NA          &lt;NA&gt;
-#&gt; 5  0.23983315 0.3835477924 0.23983315 3.418624544   0  NA          &lt;NA&gt;
-#&gt; 6  0.61111926 0.8395176084 0.61111926 6.269061066   0  NA          &lt;NA&gt;
-#&gt; 7  0.59332092 0.1959123460 0.59332092 1.482792836   0  NA          &lt;NA&gt;
-#&gt; 8  0.31862004 0.7966711937 0.31862004 6.556616219   0  NA          &lt;NA&gt;
-#&gt; 9  0.06787471 0.0373930678 0.06787471 1.035344811   0  NA          &lt;NA&gt;
-#&gt; 10 0.86559875 0.5932073169 0.86559875 3.996449507   0  NA          &lt;NA&gt;
-#&gt; 11 0.99683561 0.0002461426 0.99683561 0.002693454   1  NA          &lt;NA&gt;
-#&gt; 12 0.28749301 0.0003954721 0.28749301 0.466422148   1  NA          &lt;NA&gt;
-#&gt; 13 0.68275299 0.0005135057 0.68275299 0.176425702   1  NA          &lt;NA&gt;
-#&gt; 14 0.01862481 0.0002871385 0.01862481 0.865935267   1  NA          &lt;NA&gt;
-#&gt; 15 0.49153716 0.0002143929 0.49153716 0.300156355   2  NA          &lt;NA&gt;
-#&gt; 16 0.11132573 0.0006575370 0.11132573 0.671276923   2  NA          &lt;NA&gt;
-#&gt; 17 0.86227468 0.0007494661 0.86227468 0.075031240   2  NA          &lt;NA&gt;
-#&gt; 18 0.18259950 0.0004051855 0.18259950 0.575551612   2  NA          &lt;NA&gt;
-#&gt; 19 0.39534151 0.0002955371 0.39534151 0.373062304   3  NA          &lt;NA&gt;
-#&gt; 20 0.60137988 0.0002180312 0.60137988 0.225714924   3  NA          &lt;NA&gt;
-#&gt; 21 0.77955915 0.0001105130 0.77955915 0.117629168   3  NA          &lt;NA&gt;
-#&gt; 22 0.23606723 0.0014456652 0.23606723 0.523992893   3  NA          &lt;NA&gt;
-#&gt;    exec.time         dib error.model train.time  prop.type propose.time
-#&gt; 1      0.000          NA        &lt;NA&gt;         NA initdesign           NA
-#&gt; 2      0.000          NA        &lt;NA&gt;         NA initdesign           NA
-#&gt; 3      0.000          NA        &lt;NA&gt;         NA initdesign           NA
-#&gt; 4      0.001          NA        &lt;NA&gt;         NA initdesign           NA
-#&gt; 5      0.000          NA        &lt;NA&gt;         NA initdesign           NA
-#&gt; 6      0.000          NA        &lt;NA&gt;         NA initdesign           NA
-#&gt; 7      0.000          NA        &lt;NA&gt;         NA initdesign           NA
-#&gt; 8      0.000          NA        &lt;NA&gt;         NA initdesign           NA
-#&gt; 9      0.000          NA        &lt;NA&gt;         NA initdesign           NA
-#&gt; 10     0.000          NA        &lt;NA&gt;         NA initdesign           NA
-#&gt; 11     0.000 -1.22602674        &lt;NA&gt;      0.050 infill_dib        0.201
-#&gt; 12     0.000 -0.68549410        &lt;NA&gt;         NA infill_dib        0.203
-#&gt; 13     0.000 -0.29240771        &lt;NA&gt;         NA infill_dib        0.203
-#&gt; 14     0.000 -0.23338336        &lt;NA&gt;         NA infill_dib        0.206
-#&gt; 15     0.000 -0.19486620        &lt;NA&gt;      0.044 infill_dib        0.221
-#&gt; 16     0.000 -0.17840975        &lt;NA&gt;         NA infill_dib        0.235
-#&gt; 17     0.000 -0.13329003        &lt;NA&gt;         NA infill_dib        0.224
-#&gt; 18     0.000 -0.10684702        &lt;NA&gt;         NA infill_dib        0.226
-#&gt; 19     0.000 -0.09676551        &lt;NA&gt;      0.045 infill_dib        0.250
-#&gt; 20     0.000 -0.08029924        &lt;NA&gt;         NA infill_dib        0.253
-#&gt; 21     0.000 -0.06500851        &lt;NA&gt;         NA infill_dib        0.308
-#&gt; 22     0.000 -0.05150947        &lt;NA&gt;         NA infill_dib        0.252
+#&gt; 1  0.47506487 6.482106e-01 0.47506487 5.032078350   0  NA          &lt;NA&gt;
+#&gt; 2  0.16018794 4.921753e-01 0.16018794 4.496971964   0  NA          &lt;NA&gt;
+#&gt; 3  0.77277842 9.875772e-01 0.77277842 7.123889856   0  NA          &lt;NA&gt;
+#&gt; 4  0.95226667 2.541159e-01 0.95226667 1.517822718   0  NA          &lt;NA&gt;
+#&gt; 5  0.23983315 3.835478e-01 0.23983315 3.418624544   0  NA          &lt;NA&gt;
+#&gt; 6  0.61111926 8.395176e-01 0.61111926 6.269061066   0  NA          &lt;NA&gt;
+#&gt; 7  0.59332092 1.959123e-01 0.59332092 1.482792836   0  NA          &lt;NA&gt;
+#&gt; 8  0.31862004 7.966712e-01 0.31862004 6.556616219   0  NA          &lt;NA&gt;
+#&gt; 9  0.06787471 3.739307e-02 0.06787471 1.035344811   0  NA          &lt;NA&gt;
+#&gt; 10 0.86559875 5.932073e-01 0.86559875 3.996449507   0  NA          &lt;NA&gt;
+#&gt; 11 0.99800816 1.266209e-03 0.99800816 0.006716162   1  NA          &lt;NA&gt;
+#&gt; 12 0.28737455 5.492732e-04 0.28737455 0.467546794   1  NA          &lt;NA&gt;
+#&gt; 13 0.68113150 2.389582e-04 0.68113150 0.175956724   1  NA          &lt;NA&gt;
+#&gt; 14 0.02155166 4.491301e-04 0.02155166 0.856940919   1  NA          &lt;NA&gt;
+#&gt; 15 0.48558549 1.027835e-04 0.48558549 0.303763179   2  NA          &lt;NA&gt;
+#&gt; 16 0.12135996 4.805756e-05 0.12135996 0.651989629   2  NA          &lt;NA&gt;
+#&gt; 17 0.86682961 1.316864e-03 0.86682961 0.075313964   2  NA          &lt;NA&gt;
+#&gt; 18 0.38224958 1.130112e-05 0.38224958 0.381806915   2  NA          &lt;NA&gt;
+#&gt; 19 0.19636033 2.093201e-03 0.19636033 0.571558664   3  NA          &lt;NA&gt;
+#&gt; 20 0.59890454 1.849435e-04 0.59890454 0.227131461   3  NA          &lt;NA&gt;
+#&gt; 21 0.05259939 1.018637e-03 0.05259939 0.778773282   3  NA          &lt;NA&gt;
+#&gt; 22 0.78871649 1.748345e-04 0.78871649 0.112777953   3  NA          &lt;NA&gt;
+#&gt;    exec.time         dib error.model constant.model train.time  prop.type
+#&gt; 1      0.001          NA        &lt;NA&gt;          FALSE         NA initdesign
+#&gt; 2      0.000          NA        &lt;NA&gt;          FALSE         NA initdesign
+#&gt; 3      0.000          NA        &lt;NA&gt;          FALSE         NA initdesign
+#&gt; 4      0.000          NA        &lt;NA&gt;          FALSE         NA initdesign
+#&gt; 5      0.000          NA        &lt;NA&gt;          FALSE         NA initdesign
+#&gt; 6      0.000          NA        &lt;NA&gt;          FALSE         NA initdesign
+#&gt; 7      0.000          NA        &lt;NA&gt;          FALSE         NA initdesign
+#&gt; 8      0.000          NA        &lt;NA&gt;          FALSE         NA initdesign
+#&gt; 9      0.000          NA        &lt;NA&gt;          FALSE         NA initdesign
+#&gt; 10     0.000          NA        &lt;NA&gt;          FALSE         NA initdesign
+#&gt; 11     0.000 -1.22078072        &lt;NA&gt;          FALSE      0.043 infill_dib
+#&gt; 12     0.000 -0.68685935        &lt;NA&gt;          FALSE         NA infill_dib
+#&gt; 13     0.000 -0.29448425        &lt;NA&gt;          FALSE         NA infill_dib
+#&gt; 14     0.000 -0.23404429        &lt;NA&gt;          FALSE         NA infill_dib
+#&gt; 15     0.000 -0.19906435        &lt;NA&gt;          FALSE      0.047 infill_dib
+#&gt; 16     0.000 -0.16837814        &lt;NA&gt;          FALSE         NA infill_dib
+#&gt; 17     0.000 -0.13122666        &lt;NA&gt;          FALSE         NA infill_dib
+#&gt; 18     0.000 -0.10196122        &lt;NA&gt;          FALSE         NA infill_dib
+#&gt; 19     0.000 -0.08943084        &lt;NA&gt;          FALSE      0.054 infill_dib
+#&gt; 20     0.000 -0.08121362        &lt;NA&gt;          FALSE         NA infill_dib
+#&gt; 21     0.000 -0.06901274        &lt;NA&gt;          FALSE         NA infill_dib
+#&gt; 22     0.000 -0.06897539        &lt;NA&gt;          FALSE         NA infill_dib
+#&gt;    propose.time exec.timestamp
+#&gt; 1            NA     1478707393
+#&gt; 2            NA     1478707393
+#&gt; 3            NA     1478707393
+#&gt; 4            NA     1478707393
+#&gt; 5            NA     1478707393
+#&gt; 6            NA     1478707393
+#&gt; 7            NA     1478707393
+#&gt; 8            NA     1478707393
+#&gt; 9            NA     1478707393
+#&gt; 10           NA     1478707393
+#&gt; 11        0.194     1478707394
+#&gt; 12        0.182     1478707394
+#&gt; 13        0.192     1478707394
+#&gt; 14        0.204     1478707394
+#&gt; 15        0.206     1478707395
+#&gt; 16        0.216     1478707395
+#&gt; 17        0.229     1478707395
+#&gt; 18        0.207     1478707395
+#&gt; 19        0.224     1478707396
+#&gt; 20        0.253     1478707396
+#&gt; 21        0.255     1478707396
+#&gt; 22        0.273     1478707396
 </code></pre></div>
-            
         </div>
 
         <footer class="col-md-12">
             <hr>
-            
             <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</p>
         </footer>
-
-        <script src="../js/jquery-1.10.2.min.js"></script>
-        <script src="../js/bootstrap-3.0.3.min.js"></script>
-        <script src="../js/highlight.pack.js"></script>
         <script>var base_url = '..';</script>
         <script data-main="../mkdocs/js/search.js" src="../mkdocs/js/require.js"></script>
         <script src="../js/base.js"></script>
-        <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                        <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+        <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query">
                     </div>
-                    <div class="modal-body">
-                        <p>
-                            From here you can search these documents. Enter
-                            your search terms below.
-                        </p>
-                        <form role="form">
-                            <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query">
-                            </div>
-                        </form>
-                        <div id="mkdocs-search-results"></div>
-                    </div>
-                    <div class="modal-footer">
-                    </div>
-                </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
             </div>
         </div>
+    </div>
+</div>
 
     </body>
 </html>

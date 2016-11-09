@@ -222,8 +222,7 @@ Now we will apply the mbo() function to optimize the two objective functions.
 control1 = makeMBOControl()
 control1 = setMBOControlInfill(
   control = control1,
-  crit = "ei",
-  opt = "cmaes"
+  crit = "ei"
 )
 control1 = setMBOControlTermination(
   control = control1,
@@ -233,8 +232,7 @@ control1 = setMBOControlTermination(
 control2 = makeMBOControl()
 control2 = setMBOControlInfill(
   control = control2,
-  crit = "mean",
-  opt = "focussearch"
+  crit = "mean"
 )
 control2 = setMBOControlTermination(
   control = control2,
