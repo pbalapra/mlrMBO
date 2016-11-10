@@ -9,8 +9,8 @@ if [ "$TRAVIS_REPO_SLUG" == "mlr-org/mlrMBO" ] && [ "$TRAVIS_PULL_REQUEST" == "f
   echo -e "Publishing tutorial...\n"
 
   cd ~/$TRAVIS_REPO_SLUG
-  git config --global user.email $GIT_EMAIL
-  git config --global user.name $GIT_NAME
+  git config --global user.email "travis@travis-ci.org"
+  git config --global user.name "travis-ci"
   git checkout gh-pages
   git config push.default matching
   git add devel
