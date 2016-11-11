@@ -8,10 +8,6 @@ branches:
     only:
         - gh-pages
 
-env:
-  global:
-    - ENCRYPTION_LABEL: "4a432f919f81"
-
 addons:
   apt:
     sources:
