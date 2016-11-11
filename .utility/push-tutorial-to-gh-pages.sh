@@ -9,6 +9,7 @@ if [ "$TRAVIS_REPO_SLUG" == "mlr-org/mlrMBO" ] && [ "$TRAVIS_PULL_REQUEST" == "f
 
   echo -e "Publishing tutorial...\n"
 
+  git remote set-url origin git@github.com:mlr-org/mlrMBO.git
   git config --global user.email "travis@travis-ci.org"
   git config --global user.name "travis-ci"
   git checkout gh-pages
