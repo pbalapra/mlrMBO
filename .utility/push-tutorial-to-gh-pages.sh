@@ -9,7 +9,6 @@ if [ "$TRAVIS_REPO_SLUG" == "mlr-org/mlrMBO" ] && [ "$TRAVIS_PULL_REQUEST" == "f
 
   echo -e "Publishing tutorial...\n"
 
-  cd ~/$TRAVIS_REPO_SLUG
   git config --global user.email "travis@travis-ci.org"
   git config --global user.name "travis-ci"
   git checkout gh-pages
@@ -23,7 +22,7 @@ if [ "$TRAVIS_REPO_SLUG" == "mlr-org/mlrMBO" ] && [ "$TRAVIS_PULL_REQUEST" == "f
   eval "$(ssh-agent -s)"
   ssh-add deploy_key
 
-  git push origin gh
+  git push origin gh-pages
 
   echo -e "Published tutorial to gh-pages.\n"
   
