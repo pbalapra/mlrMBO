@@ -350,28 +350,28 @@ control2 = setMBOControlTermination(
 #&gt; 33  20.40116345 -11.35839  0.1671055  8.996293  0.07495621 19.37707   8
 #&gt; 34  -0.09598261 -11.03762 -0.2741146  9.177053 -0.53188528 15.93757   9
 #&gt; 35   1.02545547 -11.14438 -2.1749602  8.793208 -0.20463488 15.51709  10
-#&gt;    eol error.message exec.time          ei error.model constant.model
-#&gt; 26  NA          &lt;NA&gt;         0 -0.13572183        &lt;NA&gt;          FALSE
-#&gt; 27  NA          &lt;NA&gt;         0 -0.04343611        &lt;NA&gt;          FALSE
-#&gt; 28  NA          &lt;NA&gt;         0 -0.06930553        &lt;NA&gt;          FALSE
-#&gt; 29  NA          &lt;NA&gt;         0 -0.07111303        &lt;NA&gt;          FALSE
-#&gt; 30  NA          &lt;NA&gt;         0 -0.04882831        &lt;NA&gt;          FALSE
-#&gt; 31  NA          &lt;NA&gt;         0 -0.05262250        &lt;NA&gt;          FALSE
-#&gt; 32  NA          &lt;NA&gt;         0 -0.04465761        &lt;NA&gt;          FALSE
-#&gt; 33  NA          &lt;NA&gt;         0 -0.07328187        &lt;NA&gt;          FALSE
-#&gt; 34  NA          &lt;NA&gt;         0 -0.15297708        &lt;NA&gt;          FALSE
-#&gt; 35  NA          &lt;NA&gt;         0 -0.09966843        &lt;NA&gt;          FALSE
-#&gt;    train.time prop.type propose.time exec.timestamp        se     mean
-#&gt; 26      0.045 infill_ei        1.475     1478707130 0.1701271 19.75186
-#&gt; 27      0.042 infill_ei        1.136     1478707131 0.2315570 17.37290
-#&gt; 28      0.058 infill_ei        1.199     1478707133 0.2334914 17.30166
-#&gt; 29      0.198 infill_ei        1.172     1478707134 0.1798618 16.78846
-#&gt; 30      0.056 infill_ei        1.438     1478707136 0.2711088 16.93882
-#&gt; 31      0.052 infill_ei        1.459     1478707137 0.3026688 16.96312
-#&gt; 32      0.067 infill_ei        1.317     1478707138 0.2836455 16.96928
-#&gt; 33      0.300 infill_ei        1.213     1478707140 0.3412791 16.93965
-#&gt; 34      0.044 infill_ei        1.349     1478707141 0.1966018 16.66667
-#&gt; 35      0.252 infill_ei        1.320     1478707143 0.1522894 15.87113
+#&gt;    eol error.message exec.time          ei error.model train.time
+#&gt; 26  NA          &lt;NA&gt;     0.000 -0.13572183        &lt;NA&gt;      0.070
+#&gt; 27  NA          &lt;NA&gt;     0.000 -0.04343611        &lt;NA&gt;      0.110
+#&gt; 28  NA          &lt;NA&gt;     0.000 -0.06930553        &lt;NA&gt;      0.085
+#&gt; 29  NA          &lt;NA&gt;     0.000 -0.07111303        &lt;NA&gt;      0.272
+#&gt; 30  NA          &lt;NA&gt;     0.000 -0.04882831        &lt;NA&gt;      0.076
+#&gt; 31  NA          &lt;NA&gt;     0.000 -0.05262250        &lt;NA&gt;      0.075
+#&gt; 32  NA          &lt;NA&gt;     0.000 -0.04465761        &lt;NA&gt;      0.101
+#&gt; 33  NA          &lt;NA&gt;     0.001 -0.07328187        &lt;NA&gt;      0.158
+#&gt; 34  NA          &lt;NA&gt;     0.000 -0.15297708        &lt;NA&gt;      0.053
+#&gt; 35  NA          &lt;NA&gt;     0.000 -0.09966843        &lt;NA&gt;      0.210
+#&gt;    prop.type propose.time
+#&gt; 26 infill_ei        2.341
+#&gt; 27 infill_ei        3.054
+#&gt; 28 infill_ei        1.528
+#&gt; 29 infill_ei        1.667
+#&gt; 30 infill_ei        1.778
+#&gt; 31 infill_ei        1.837
+#&gt; 32 infill_ei        1.933
+#&gt; 33 infill_ei        2.167
+#&gt; 34 infill_ei        1.676
+#&gt; 35 infill_ei        1.846
 </code></pre>
 
 <p>The default output of mbo contains the best found parameter set and the optimzation path. The <code>MBOResult</code> object contains additional information, most importantly:</p>
@@ -403,28 +403,28 @@ mbo(objfun1, design = design1, learner = surr.km, control = control1, show.info 
 #&gt; 28  -7.228811 -10.883809  23.025155   4.371716  -5.586849 19.92917   3  NA
 #&gt; 29  -4.356826 -15.236885  26.828895   5.941049  -6.683645 20.52021   4  NA
 #&gt; 30   4.075451 -10.199311  13.723630   4.539547 -11.181502 18.64589   5  NA
-#&gt;    error.message exec.time       cb error.model constant.model train.time
-#&gt; 21          &lt;NA&gt;     0.000       NA        &lt;NA&gt;          FALSE         NA
-#&gt; 22          &lt;NA&gt;     0.000       NA        &lt;NA&gt;          FALSE         NA
-#&gt; 23          &lt;NA&gt;     0.000       NA        &lt;NA&gt;          FALSE         NA
-#&gt; 24          &lt;NA&gt;     0.000       NA        &lt;NA&gt;          FALSE         NA
-#&gt; 25          &lt;NA&gt;     0.000       NA        &lt;NA&gt;          FALSE         NA
-#&gt; 26          &lt;NA&gt;     0.000 19.65947        &lt;NA&gt;          FALSE      0.045
-#&gt; 27          &lt;NA&gt;     0.000 18.90914        &lt;NA&gt;          FALSE      0.059
-#&gt; 28          &lt;NA&gt;     0.001 18.92139        &lt;NA&gt;          FALSE      0.048
-#&gt; 29          &lt;NA&gt;     0.000 18.93866        &lt;NA&gt;          FALSE      0.097
-#&gt; 30          &lt;NA&gt;     0.000 18.82714        &lt;NA&gt;          FALSE      0.049
-#&gt;     prop.type propose.time exec.timestamp        se     mean lambda
-#&gt; 21 initdesign           NA     1478707143        NA       NA     NA
-#&gt; 22 initdesign           NA     1478707143        NA       NA     NA
-#&gt; 23 initdesign           NA     1478707143        NA       NA     NA
-#&gt; 24 initdesign           NA     1478707143        NA       NA     NA
-#&gt; 25 initdesign           NA     1478707143        NA       NA     NA
-#&gt; 26  infill_cb        1.120     1478707144 0.1837239 19.84319      1
-#&gt; 27  infill_cb        1.261     1478707146 0.1712301 19.08037      1
-#&gt; 28  infill_cb        1.186     1478707147 0.1575612 19.07895      1
-#&gt; 29  infill_cb        1.270     1478707148 0.1379985 19.07666      1
-#&gt; 30  infill_cb        1.229     1478707150 0.1967692 19.02391      1
+#&gt;    error.message exec.time       cb error.model train.time  prop.type
+#&gt; 21          &lt;NA&gt;     0.001       NA        &lt;NA&gt;         NA initdesign
+#&gt; 22          &lt;NA&gt;     0.000       NA        &lt;NA&gt;         NA initdesign
+#&gt; 23          &lt;NA&gt;     0.000       NA        &lt;NA&gt;         NA initdesign
+#&gt; 24          &lt;NA&gt;     0.000       NA        &lt;NA&gt;         NA initdesign
+#&gt; 25          &lt;NA&gt;     0.000       NA        &lt;NA&gt;         NA initdesign
+#&gt; 26          &lt;NA&gt;     0.000 19.65947        &lt;NA&gt;      0.064  infill_cb
+#&gt; 27          &lt;NA&gt;     0.001 18.90914        &lt;NA&gt;      0.088  infill_cb
+#&gt; 28          &lt;NA&gt;     0.000 18.92139        &lt;NA&gt;      0.070  infill_cb
+#&gt; 29          &lt;NA&gt;     0.000 18.93866        &lt;NA&gt;      0.141  infill_cb
+#&gt; 30          &lt;NA&gt;     0.000 18.82714        &lt;NA&gt;      0.057  infill_cb
+#&gt;    propose.time
+#&gt; 21           NA
+#&gt; 22           NA
+#&gt; 23           NA
+#&gt; 24           NA
+#&gt; 25           NA
+#&gt; 26        1.455
+#&gt; 27        1.782
+#&gt; 28        1.985
+#&gt; 29        2.002
+#&gt; 30        1.756
 </code></pre>
 
 <h2 id="optimization-of-objfun2">Optimization of objfun2</h2>
@@ -452,28 +452,17 @@ If we use <code>mean</code> as the infill criterion, any kind of model which can
 #&gt; 23 0.4614110 2      b 2.236062   8  NA          &lt;NA&gt;         0 -2.177887
 #&gt; 24 0.4547185 2      b 2.235979   9  NA          &lt;NA&gt;         0 -2.178190
 #&gt; 25 0.4667716 2      b 2.236057  10  NA          &lt;NA&gt;         0 -2.182757
-#&gt;    error.model constant.model train.time   prop.type propose.time
-#&gt; 16        &lt;NA&gt;          FALSE      0.014 infill_mean        0.523
-#&gt; 17        &lt;NA&gt;          FALSE      0.144 infill_mean        0.477
-#&gt; 18        &lt;NA&gt;          FALSE      0.004 infill_mean        0.495
-#&gt; 19        &lt;NA&gt;          FALSE      0.004 infill_mean        0.549
-#&gt; 20        &lt;NA&gt;          FALSE      0.004 infill_mean        0.598
-#&gt; 21        &lt;NA&gt;          FALSE      0.004 infill_mean        0.631
-#&gt; 22        &lt;NA&gt;          FALSE      0.005 infill_mean        0.631
-#&gt; 23        &lt;NA&gt;          FALSE      0.004 infill_mean        0.661
-#&gt; 24        &lt;NA&gt;          FALSE      0.005 infill_mean        0.524
-#&gt; 25        &lt;NA&gt;          FALSE      0.005 infill_mean        0.590
-#&gt;    exec.timestamp
-#&gt; 16     1478707150
-#&gt; 17     1478707151
-#&gt; 18     1478707151
-#&gt; 19     1478707152
-#&gt; 20     1478707152
-#&gt; 21     1478707153
-#&gt; 22     1478707154
-#&gt; 23     1478707154
-#&gt; 24     1478707155
-#&gt; 25     1478707156
+#&gt;    error.model train.time   prop.type propose.time
+#&gt; 16        &lt;NA&gt;      0.007 infill_mean        0.636
+#&gt; 17        &lt;NA&gt;      0.008 infill_mean        0.700
+#&gt; 18        &lt;NA&gt;      0.006 infill_mean        0.752
+#&gt; 19        &lt;NA&gt;      0.006 infill_mean        0.852
+#&gt; 20        &lt;NA&gt;      0.006 infill_mean        0.648
+#&gt; 21        &lt;NA&gt;      0.006 infill_mean        0.673
+#&gt; 22        &lt;NA&gt;      0.006 infill_mean        0.810
+#&gt; 23        &lt;NA&gt;      0.007 infill_mean        0.796
+#&gt; 24        &lt;NA&gt;      0.007 infill_mean        0.831
+#&gt; 25        &lt;NA&gt;      0.007 infill_mean        0.831
 </code></pre>
 
 <p>If we want to use the expected improvement <code>ei</code> or (lower) confidence bound <code>cb</code>, the <code>predict.type</code> attribute of the learner has be set to <code>se</code>. A list of regression learners which support it can be viewed by:</p>
@@ -491,38 +480,27 @@ mbo(objfun2, design = design2, learner = learner_rf, control = control2, show.in
 #&gt; Optimization path
 #&gt; 15 + 10 entries in total, displaying last 10 (or less):
 #&gt;            j k method        y dob eol error.message exec.time
-#&gt; 16 0.4662133 2      b 2.236061   1  NA          &lt;NA&gt;     0.001
-#&gt; 17 0.4281566 2      b 2.234660   2  NA          &lt;NA&gt;     0.000
-#&gt; 18 0.4497641 2      b 2.235852   3  NA          &lt;NA&gt;     0.000
-#&gt; 19 0.4088809 2      b 2.232715   4  NA          &lt;NA&gt;     0.000
-#&gt; 20 0.4059806 2      b 2.232351   5  NA          &lt;NA&gt;     0.000
-#&gt; 21 0.3982380 2      b 2.231286   6  NA          &lt;NA&gt;     0.000
-#&gt; 22 0.3808699 2      b 2.228411   7  NA          &lt;NA&gt;     0.000
-#&gt; 23 0.3962689 2      b 2.230994   8  NA          &lt;NA&gt;     0.000
-#&gt; 24 0.3524119 2      b 2.222248   9  NA          &lt;NA&gt;     0.000
-#&gt; 25 0.3828872 2      b 2.228780  10  NA          &lt;NA&gt;     0.000
-#&gt;              ei error.model constant.model train.time prop.type
-#&gt; 16 -0.002707886        &lt;NA&gt;          FALSE      0.129 infill_ei
-#&gt; 17 -0.002317139        &lt;NA&gt;          FALSE      0.114 infill_ei
-#&gt; 18 -0.004866736        &lt;NA&gt;          FALSE      0.118 infill_ei
-#&gt; 19 -0.004091895        &lt;NA&gt;          FALSE      0.118 infill_ei
-#&gt; 20 -0.001573312        &lt;NA&gt;          FALSE      0.116 infill_ei
-#&gt; 21 -0.001918039        &lt;NA&gt;          FALSE      0.109 infill_ei
-#&gt; 22 -0.003486197        &lt;NA&gt;          FALSE      0.127 infill_ei
-#&gt; 23 -0.003619793        &lt;NA&gt;          FALSE      0.138 infill_ei
-#&gt; 24 -0.003800144        &lt;NA&gt;          FALSE      0.130 infill_ei
-#&gt; 25 -0.002143127        &lt;NA&gt;          FALSE      0.136 infill_ei
-#&gt;    propose.time exec.timestamp         se     mean
-#&gt; 16       23.633     1478707180 0.14638759 1.986472
-#&gt; 17       22.856     1478707203 0.11756984 2.039820
-#&gt; 18       22.442     1478707226 0.10646215 2.097863
-#&gt; 19       22.630     1478707249 0.11481644 2.073836
-#&gt; 20       23.001     1478707272 0.09721342 2.065962
-#&gt; 21       24.012     1478707296 0.09388525 2.080755
-#&gt; 22       24.443     1478707321 0.12840364 2.039174
-#&gt; 23       24.179     1478707346 0.08412808 2.124469
-#&gt; 24       22.965     1478707369 0.10762158 2.083552
-#&gt; 25       23.485     1478707393 0.08329732 2.106402
+#&gt; 16 0.4662133 2      b 2.236061   1  NA          &lt;NA&gt;         0
+#&gt; 17 0.4281566 2      b 2.234660   2  NA          &lt;NA&gt;         0
+#&gt; 18 0.4497641 2      b 2.235852   3  NA          &lt;NA&gt;         0
+#&gt; 19 0.4088809 2      b 2.232715   4  NA          &lt;NA&gt;         0
+#&gt; 20 0.4059806 2      b 2.232351   5  NA          &lt;NA&gt;         0
+#&gt; 21 0.3982380 2      b 2.231286   6  NA          &lt;NA&gt;         0
+#&gt; 22 0.3808699 2      b 2.228411   7  NA          &lt;NA&gt;         0
+#&gt; 23 0.3962689 2      b 2.230994   8  NA          &lt;NA&gt;         0
+#&gt; 24 0.3524119 2      b 2.222248   9  NA          &lt;NA&gt;         0
+#&gt; 25 0.3828872 2      b 2.228780  10  NA          &lt;NA&gt;         0
+#&gt;              ei error.model train.time prop.type propose.time
+#&gt; 16 -0.002707886        &lt;NA&gt;      0.418 infill_ei       34.402
+#&gt; 17 -0.002317139        &lt;NA&gt;      0.170 infill_ei       28.357
+#&gt; 18 -0.004866736        &lt;NA&gt;      0.335 infill_ei       28.315
+#&gt; 19 -0.004091895        &lt;NA&gt;      0.188 infill_ei       29.660
+#&gt; 20 -0.001573312        &lt;NA&gt;      0.182 infill_ei       29.660
+#&gt; 21 -0.001918039        &lt;NA&gt;      0.193 infill_ei       28.644
+#&gt; 22 -0.003486197        &lt;NA&gt;      0.228 infill_ei       29.108
+#&gt; 23 -0.003619793        &lt;NA&gt;      0.178 infill_ei       29.710
+#&gt; 24 -0.003800144        &lt;NA&gt;      0.279 infill_ei       33.505
+#&gt; 25 -0.002143127        &lt;NA&gt;      0.195 infill_ei       31.239
 </code></pre>
 
 <p>Finally, if a learner, which does not support the <code>se</code> prediction type, should be applied for the optimization with the <code>ei</code> infill criterion, it is possible to create a bagging model. For details on how to do it take a look at the <a href="https://mlr-org.github.io/mlr-tutorial/devel/html/bagging/index.html">bagging section</a> in the <code>mlr</code> tutorial.</p></div>
