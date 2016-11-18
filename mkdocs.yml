@@ -11,9 +11,11 @@ markdown_extensions:
 extra_javascript: ['https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML']
 pages:
 - Home: 'index.md'
-- Basics:
-    - 'Quickstart': 'quickstart.md'
-    - 'In Depth Introduction': 'in_depth_introduction.md'
+- Quickstart: 'quickstart.md'
+- Topics:
+    - 'Model Based Optimization': 'model_based_optimization.md' 
+    - 'In depth introduction': in_depth_introduction.md
+    - 'Mixed Spaced Optimization': 'mixed_space_optimization'
 - Advanced:
     - 'Parallelization': 'parallelization.md'
     - 'Multi point proposal': 'multi_point_proposal.md'

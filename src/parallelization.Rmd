@@ -1,9 +1,9 @@
-Work in progress
+# Work in progress!
 
-<!--# Parallelization
+# Parallelization
 
 It is possible to parallelize the evaluation of the target function to speed up the computation. Internally the
-evaluation of the target function is realized with the R package ``parallelMap``. This package offers simple parallelization with various different backends. For details on the usage see the [parallelMap github page](https://github.com/berndbischl/parallelMap#parallelmap), which offers a nice tutorial and describes all possible backends thorougly.  For our usage we use a *multicore* backend. Note, that the multicore parallelization does _not_ work on windows machines.
+evaluation of the target function is realized with the R package `parallelMap`. This package offers simple parallelization with various different backends. For details on the usage see the [parallelMap github page](https://github.com/berndbischl/parallelMap#parallelmap), which offers a nice tutorial and describes all possible backends thorougly.  For our usage we use a *multicore* backend. Note, that the multicore parallelization does _not_ work on windows machines.
 
 ```{r eval=FALSE}
 library(mlrMBO)
@@ -27,7 +27,7 @@ Since mbo is a sequential method we cannot gain any improvement in the running t
 
 ## Noisy functions
 
-If our target function is not deterministic (e.g. the accuracy of a machine learning model) it is advisable to take the crossvalidation error. For the crossvalidation error, the model is fitted multuple times on slightly different training data. This process can be easily parallelized with ``parallelMap``.
+If our target function is not deterministic (e.g. the accuracy of a machine learning model) it is advisable to take the crossvalidation error. For the crossvalidation error, the model is fitted multuple times on slightly different training data. This process can be easily parallelized with `parallelMap`.
 
 ```{r, eval = FALSE}
 library(mlr)
@@ -59,10 +59,9 @@ control = setMBOControlTermination(control, iters = 10L)
 
 design = generateDesign(n = 10, getParamSet(obj.fun), trafo = TRUE)
 
-parallelStartMulticore(cous = 4L)
+parallelStartMulticore(cpus = 4L)
 exampleRun(obj.fun, design = design, control = control)
 parallelStop()
 
 ```
--->
 
