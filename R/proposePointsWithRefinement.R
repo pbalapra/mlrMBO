@@ -11,7 +11,7 @@ proposePointsWithRefinement = function(opt.state) {
   par.set = getOptProblemParSet(opt.problem)
 
   #subset everything yo the numeric space
-  reduced.par.set = filterParamsNumeric(par.set)
+  reduced.par.set.nn = filterParamsNumeric(par.set)
 
   # generate subset design
   factor.values = as.list(res$prop.points[1L, ])
@@ -23,14 +23,15 @@ proposePointsWithRefinement = function(opt.state) {
   reduced.design = data[factor.values, keep, on = names(factor.values), nomatch = 0L, with = FALSE]
   all.na = vlapply(reduced.design, function(x) all(is.na(x)))
   not.na = names(all.na[!all.na])
-  reduced.par.set = filterParams(reduced.par.set, ids = not.na[not.na != getTaskTargetNames(tasks)])
+  reduced.par.set = filterParams(reduced.par.set.nn, ids = not.na[not.na != getTaskTargetNames(tasks)])
   reduced.design = reduced.design[, not.na, with = FALSE]
   refinement.tasks = list(mlr:::changeData(tasks, as.data.frame(reduced.design)))
 
-  min.n = getTaskNFeats(refinement.tasks[[1]]) * 2 + 1
-
-  if (min.n < getTaskSize(refinement.tasks[[1]])) {
-    print("Expanding x-space using regression tree partitioning")
+  min.n = ncol(reduced.design) + 1
+  print(sprintf("X-space of dimension p: %i, n: %i", ncol(reduced.design), nrow(reduced.design)))
+  if (min.n > nrow(reduced.design)) {
+    print("Expanding...")
+    require(partykit)
     expand.model = train(makeLearner("regr.rpart", minbucket = min.n), tasks)$learner.model
     node = predict(partykit::as.party(expand.model), res$prop.points, type = "node")
     expanded.obs = as.numeric(names(expand.model$where[expand.model$where == node]))
@@ -38,6 +39,7 @@ proposePointsWithRefinement = function(opt.state) {
     all.na = vlapply(reduced.design, function(x) all(is.na(x)))
     not.na = names(all.na[!all.na])
     reduced.design = reduced.design[, not.na, with = FALSE]
+    print(sprintf("New design of size: p: %i, n: %i", ncol(reduced.design), nrow(reduced.design)[1]))
     refinement.tasks = list(mlr:::changeData(tasks, as.data.frame(reduced.design)))
   }
 
