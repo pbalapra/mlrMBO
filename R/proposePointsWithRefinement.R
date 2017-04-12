@@ -24,8 +24,22 @@ proposePointsWithRefinement = function(opt.state) {
   all.na = vlapply(reduced.design, function(x) all(is.na(x)))
   not.na = names(all.na[!all.na])
   reduced.par.set = filterParams(reduced.par.set, ids = not.na[not.na != getTaskTargetNames(tasks)])
-  reduced.design = as.data.frame(reduced.design[, not.na, with = FALSE])
-  refinement.tasks = list(mlr:::changeData(tasks, reduced.design))
+  reduced.design = reduced.design[, not.na, with = FALSE]
+  refinement.tasks = list(mlr:::changeData(tasks, as.data.frame(reduced.design)))
+
+  min.n = getTaskNFeats(refinement.tasks[[1]]) * 2 + 1
+
+  if (min.n < getTaskSize(refinement.tasks[[1]])) {
+    print("Expanding x-space using regression tree partitioning")
+    expand.model = train(makeLearner("regr.rpart", minbucket = min.n), tasks)$learner.model
+    node = predict(partykit::as.party(expand.model), res$prop.points, type = "node")
+    expanded.obs = as.numeric(names(expand.model$where[expand.model$where == node]))
+    reduced.design = data[expanded.obs, keep, with = FALSE]
+    all.na = vlapply(reduced.design, function(x) all(is.na(x)))
+    not.na = names(all.na[!all.na])
+    reduced.design = reduced.design[, not.na, with = FALSE]
+    refinement.tasks = list(mlr:::changeData(tasks, as.data.frame(reduced.design)))
+  }
 
   for(p in seq_along(reduced.par.set$pars))
     reduced.par.set$pars[[p]]$requires = NULL
