@@ -12,35 +12,66 @@
 #                               length is one string PER PROPOSED POINT, not per element of <models>
 #                               NA if the model was Ok, or the (first) error message if some model crashed
 proposePoints.OptState = function(opt.state) {
+
+  #print(opt.state)
   opt.problem = getOptStateOptProblem(opt.state)
   control = getOptProblemControl(opt.problem)
 
-  if (control$n.objectives == 1L) {
+  m = control$n.objectives
+  res = NULL
+  if (m == 1L) {
+    # readline(prompt="proposePoints.R 2a. Press [enter] to continue")
+    # if (control$multifid) {
+    #   res = proposePointsMultiFid(opt.state)
     if (is.null(control$multipoint.method)) {
       res = proposePointsByInfillOptimization(opt.state)
     } else {
-      res = switch(control$multipoint.method,
-        "cb" = proposePointsParallelCB(opt.state),
-        "cl" = proposePointsConstantLiar(opt.state),
-        "moimbo" = proposePointsMOIMBO(opt.state)
-      )
+      if (control$multipoint.method == "cb")
+        res = proposePointsParallelCB(opt.state)
+      else if (control$multipoint.method == "cl")
+        res = proposePointsConstantLiar(opt.state)
+      else if (control$multipoint.method == "moimbo") {
+        res = proposePointsMOIMBO(opt.state)
+      }
     }
   } else {
-    res = switch(control$multiobj.method,
-      "parego" = proposePointsParEGO(opt.state),
-      "mspot"  = proposePointsMSPOT(opt.state),
-      "dib"    = proposePointsDIB(opt.state)
-    )
+    tryCatch({
+      if (is.na(getOptStateModels(opt.state)$train.time)){
+        res = proposePointsRandom(opt.state, control$propose.points)
+      } else {
+        if (control$multiobj.method == "parego") {
+          res = proposePointsParEGO(opt.state)
+        } else if (control$multiobj.method == "mspot") {
+          res = proposePointsMSPOT(opt.state)
+        } else if (control$multiobj.method == "dib") {
+            res = proposePointsDIB(opt.state)
+        }
+      }
+    }, error = function(e) {
+        print(e)
+        #readline(prompt="proposePoints.R 2a. Press [enter] to continue")
+        #res = proposePointsRandom(opt.state, control$propose.points)
+        #assign('res', res, parent.env(environment()))
+        #readline(prompt="proposePoints.R 2b. Press [enter] to continue")
+        #setOptStateModels(opt.state,train.time)<-NA_real_
+       }
+      )
+    }
+
+  if (control$interleave.random.points > 0L) {
+    add = proposePointsRandom(opt.state)
+    res = joinProposedPoints(list(res, add))
   }
 
-  if (control$interleave.random.points > 0L)
-    res = joinProposedPoints(list(res, proposePointsRandom(opt.state)))
-
   if (!is.matrix(res$crit.vals))
-    res$crit.vals = matrix(res$crit.vals, ncol = 1L)
+    res$crit.vals = matrix(as.numeric(res$crit.vals), ncol = 1L)
 
-  if (control$filter.proposed.points)
+  #readline(prompt="proposePoints.R 2c. Press [enter] to continue")
+  if (control$filter.proposed.points) {
     res = filterProposedPoints(res, opt.state)
-
+  }
+  #readline(prompt="proposePoints.R 2d. Press [enter] to continue")
+  #print(res)
   res
 }
+

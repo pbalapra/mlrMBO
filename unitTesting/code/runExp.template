@@ -1,0 +1,9 @@
+#!/bin/sh
+#PBS -N {{paramDict.id}}
+#PBS -l nodes=1:ppn=16
+#PBS -l walltime=3:00:00
+#PBS -j oe
+
+cd $PBS_O_WORKDIR
+
+Rscript mlrMBOTest1.R -s {{paramDict.s}} -i {{paramDict.i}} -m {{paramDict.m}} -p {{paramDict.p}} -n {{paramDict.n}} -o {{paramDict.o}} -b {{paramDict.b}} -u {{paramDict.u}} -t {{paramDict.id}}
