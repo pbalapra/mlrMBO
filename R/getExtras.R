@@ -24,9 +24,9 @@ getExtras = function(n, prop, train.time, control) {
     k = ifelse(control$n.objectives > 1L && control$multiobj.method == "mspot", control$n.objectives + 1, 1L)
     # pregenerate a dummmy "prop" data structure
     prop = list(crit.vals = matrix(NA_real_, nrow = n, ncol = k), propose.time = NA_real_, errors.model = NA_character_, prop.type = rep("initdesign", n))
-    # a) no infill crit components for MCO 
+    # a) no infill crit components for MCO
     # b) infill crit is ignored for multipoint moimbo, in which case we don't use any components
-    if (control$n.objectives == 1L && !is.null(getMBOInfillCritComponents(infill.crit)) && 
+    if (control$n.objectives == 1L && !is.null(getMBOInfillCritComponents(infill.crit)) &&
         (is.null(control$multipoint.method) || control$multipoint.method != "moimbo")) {
       prop$crit.components = getMBOInfillCritDummyComponents(infill.crit)
     }
@@ -41,8 +41,13 @@ getExtras = function(n, prop, train.time, control) {
     errs = rep(errs, n)
   for (i in seq_len(n)) {
     # if we use mspot, store all crit.vals
-    if (control$n.objectives > 1L && control$multiobj.method == "mspot") {
-      ex = as.list(prop$crit.vals[i, ])
+    if (control$n.objectives > 1L && control$multiobj.method == "mspot"){
+      exv = prop$crit.vals[i, ]
+      if(length(exv) == 1){
+        rl = length(c(paste(infill.crit.id, control$y.name, sep = "."), "hv.contr"))
+        exv = rep(prop$crit.vals[i, ], rl)
+      }
+      ex = as.list(exv)
       names(ex) = c(paste(infill.crit.id, control$y.name, sep = "."), "hv.contr")
       ex$error.model = errs[i]
     } else {

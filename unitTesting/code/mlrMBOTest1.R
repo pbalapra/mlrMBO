@@ -1,24 +1,26 @@
-library(mlrMBO)
+library(devtools)
+load_all("../../../mlrMBO/")
 library(parallelMap)
 library(smoof)
 library(lhs)
 library(optparse)
 
-
 option_list = list(
-  make_option(c("-s", "--seed"), type="numeric"),
-  make_option(c("-i", "--infill"), type="numeric"),
-  make_option(c("-m", "--method"), type="numeric"),
-  make_option(c("-p", "--point"), type="numeric"),
-  make_option(c("-n", "--ndim"), type="numeric"),
-  make_option(c("-o", "--nobj"), type="numeric"),
-  make_option(c("-b", "--bsize"), type="numeric"),
-  make_option(c("-u", "--budget"), type="numeric"),
-  make_option(c("-t", "--tag"), type="character")
+  make_option(c("-s", "--seed"), type="numeric",  default = 0),
+  make_option(c("-i", "--infill"), type="numeric", default = 2),
+  make_option(c("-m", "--method"), type="numeric", default = 2),
+  make_option(c("-p", "--point"), type="numeric", default = 0),
+  make_option(c("-n", "--ndim"), type="numeric", default =2),
+  make_option(c("-o", "--nobj"), type="numeric", default =2),
+  make_option(c("-b", "--bsize"), type="numeric", default=30),
+  make_option(c("-u", "--budget"), type="numeric", default=100),
+  make_option(c("-t", "--tag"), type="character", default="00008-DTLZ1")
   );
 
 opt_parser = OptionParser(option_list=option_list);
 opt = parse_args(opt_parser);
+
+
 
 seed<-opt$seed
 infill <-opt$infill
@@ -88,7 +90,9 @@ tryCatch({
 
   des = generateDesign(ndim+1, getParamSet(obj.fun), fun = lhs::maximinLHS)
 
-  surr.km = makeLearner("regr.km", predict.type = "se", covtype = "matern3_2", control = list(trace = FALSE))
+  #surr.km = makeLearner("regr.km", predict.type = "se", covtype = "matern3_2", control = list(trace = FALSE))
+  surr.km = makeLearner("regr.bgp", predict.type = "se")
+
   run = mbo(obj.fun, design=des, learner = surr.km, control = ctrl, show.info = TRUE)
   saveRDS(run, filename)
 

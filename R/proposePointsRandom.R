@@ -6,7 +6,7 @@ proposePointsRandom = function(opt.state, nb = 0) {
   par.set = getOptProblemParSet(opt.problem)
   n = control$interleave.random.points
   n = max(n, nb)
-  readline(prompt="proposePoints.R 2a. Press [enter] to continue")
+  #readline(prompt="proposePoints.R 2a. Press [enter] to continue")
   prop.points = generateRandomDesign(par.set = par.set, n)
   print(prop.points)
   crit.vals = matrix(rep.int(0, n), nrow = n, ncol = 1L)
