@@ -1,0 +1,9 @@
+#!/bin/sh
+#PBS -N 00004-DTLZ1
+#PBS -l nodes=1:ppn=16
+#PBS -l walltime=6:00:00
+#PBS -j oe
+
+cd $PBS_O_WORKDIR
+
+Rscript mlrMBOTest1.R -s 0.0 -i 1.0 -m 2.0 -p 0.0 -n 2.0 -o 2.0 -b 30.0 -u 1000.0 -t 00004-DTLZ1
